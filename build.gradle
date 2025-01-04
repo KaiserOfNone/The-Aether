@@ -34,7 +34,7 @@ loom {
 
 fabricApi {
     configureDataGeneration {
-        modId = "alloy_forgery"
+        modId = "aether"
     }
 }
 
@@ -57,6 +57,9 @@ dependencies {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${project.property("neogradle.subsystems.parchment.minecraftVersion")}:${project.property("neogradle.subsystems.parchment.mappingsVersion")}@zip")
     }
+
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixin_extra_version}"))
     include("io.github.llamalad7:mixinextras-fabric:${project.mixin_extra_version}:slim")
