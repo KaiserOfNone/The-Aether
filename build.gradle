@@ -30,6 +30,12 @@ loom {
             sourceSet(sourceSets.main)
         }
     }
+
+    runs {
+        client {
+            vmArg "-Dowo.debug=false"
+        }
+    }
 }
 
 fabricApi {

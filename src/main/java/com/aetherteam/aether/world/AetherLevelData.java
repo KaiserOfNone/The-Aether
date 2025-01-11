@@ -57,6 +57,7 @@ public class AetherLevelData extends DerivedLevelData {
         if (this.level.getAttachedOrCreate(AetherDataAttachments.AETHER_TIME).isTimeSynced()) {
             this.wrapped.setDayTime(time);
         }
+        this.dayTime = time;
     }
 
     /**
