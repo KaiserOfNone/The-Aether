@@ -1,4 +1,10 @@
-# The Aether - NeoForge - 1.21.1-1.5.2
+# The Aether - Fabric - 1.21.1-1.5.3
+
+Fixes
+
+- Fix a bug with the Aether's time not being set properly in various situations.
+
+# The Aether - Fabric - 1.21.1-1.5.2
 
 Fixes
 
