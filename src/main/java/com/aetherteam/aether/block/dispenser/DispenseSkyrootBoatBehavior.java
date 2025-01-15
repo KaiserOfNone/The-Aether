@@ -7,6 +7,7 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
@@ -35,19 +36,20 @@ public class DispenseSkyrootBoatBehavior extends DefaultDispenseItemBehavior {
         double x = source.x() + direction.getStepX() * width;
         double y = source.y() + direction.getStepY() * 1.125F;
         double z = source.z() + direction.getStepZ() * width;
-        BlockPos blockpos = source.getPos().relative(direction);
-        Boat boat = (this.isChestBoat ? new SkyrootChestBoat(level, width, x, y) : new SkyrootBoat(level, width, x, y));
+        BlockPos blockPos = source.getPos().relative(direction);
+        double h;
+        if (level.getFluidState(blockPos).is(FluidTags.WATER)) {
+            h = 1.0;
+        } else {
+            if (!level.getBlockState(blockPos).isAir() || !level.getFluidState(blockPos.below()).is(FluidTags.WATER)) {
+                return this.defaultDispenseItemBehavior.dispense(source, stack);
+            }
+
+            h = 0.0;
+        }
+
+        Boat boat = this.isChestBoat ? new SkyrootChestBoat(level, x, y + h, z) : new SkyrootBoat(level, x, y + h, z);
         boat.setYRot(direction.toYRot());
-//        double yOffset; TODO: PORT
-//        if (boat.canBoatInFluid(level.getFluidState(blockpos))) {
-//            yOffset = 1.0D;
-//        } else {
-//            if (!level.getBlockState(blockpos).isAir() || !boat.canBoatInFluid(level.getFluidState(blockpos.below()))) {
-//                return this.defaultDispenseItemBehavior.dispense(source, stack);
-//            }
-//            yOffset = 0.0D;
-//        }
-//        boat.setPos(x, y + yOffset, z);
         level.addFreshEntity(boat);
         stack.shrink(1);
         return stack;
