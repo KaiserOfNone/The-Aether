@@ -22,6 +22,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -52,10 +53,10 @@ public class RecipeHooks {
      * @return Whether an interaction is banned, as a {@link Boolean}.
      * @see com.aetherteam.aether.event.listeners.RecipeListener#checkBanned(PlayerInteractEvent.RightClickBlock)
      */
-    public static boolean checkInteractionBanned(Player player, Level level, BlockPos pos, Direction face, ItemStack stack, BlockState state, boolean spawnParticles) {
+    public static InteractionResult checkInteractionBanned(Player player, Level level, BlockPos pos, Direction face, ItemStack stack, BlockState state, boolean spawnParticles) {
         if (isItemPlacementBanned(level, pos, face, stack, spawnParticles)) {
             player.displayClientMessage(Component.translatable("aether.banned_item", stack.getItem().getName(stack)), true);
-            return true;
+            return InteractionResult.FAIL;
         }
         if (level.getBiome(pos).is(AetherTags.Biomes.ULTRACOLD) && AetherConfig.SERVER.enable_bed_explosions.get()) { // Explodes beds in the Aether if the config for it is enabled.
             if (state.is(BlockTags.BEDS) && state.getBlock() != AetherBlocks.SKYROOT_BED.get()) {
@@ -72,10 +73,10 @@ public class RecipeHooks {
                     level.explode(null, level.damageSources().badRespawnPointExplosion(vec3), null, (double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 5.0F, true, Level.ExplosionInteraction.BLOCK);
                 }
                 player.swing(InteractionHand.MAIN_HAND);
-                return true;
+                return InteractionResult.SUCCESS;
             }
         }
-        return false;
+        return InteractionResult.PASS;
     }
 
     /**

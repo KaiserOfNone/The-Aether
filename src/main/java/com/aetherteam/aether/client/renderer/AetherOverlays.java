@@ -12,6 +12,7 @@ import com.aetherteam.aether.mixin.mixins.client.accessor.HeartTypeAccessor;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -40,55 +41,55 @@ public class AetherOverlays {
     private static final ResourceLocation TEXTURE_LIFE_SHARD_HEARTS = new ResourceLocation(Aether.MODID, "textures/gui/life_shard_hearts.png");
 
     public static void registerOverlays() {
-//        event.registerAboveAll("aether_portal_overlay", (gui, pStack, partialTicks, screenWidth, screenHeight) -> { TODO: PORT
-//            Minecraft minecraft = Minecraft.getInstance();
-//            Window window = minecraft.getWindow();
-//            LocalPlayer player = minecraft.player;
-//            if (player != null) {
-//                renderAetherPortalOverlay(pStack, minecraft, window, AetherPlayer.get(player), partialTicks);
-//            }
-//        });
-//        event.registerAboveAll("inebriation_vignette", (gui, pStack, partialTicks, screenWidth, screenHeight) -> {
-//            Minecraft minecraft = Minecraft.getInstance();
-//            Window window = minecraft.getWindow();
-//            LocalPlayer player = minecraft.player;
-//            if (player != null) {
-//                renderInebriationOverlay(pStack, minecraft, window, AetherPlayer.get(player));
-//            }
-//        });
-//        event.registerAboveAll("remedy_vignette", (gui, pStack, partialTicks, screenWidth, screenHeight) -> {
-//            Minecraft minecraft = Minecraft.getInstance();
-//            Window window = minecraft.getWindow();
-//            LocalPlayer player = minecraft.player;
-//            if (player != null) {
-//                renderRemedyOverlay(pStack, minecraft, window, AetherPlayer.get(player));
-//            }
-//        });
-//        event.registerAboveAll("shield_of_repulsion_vignette", (gui, pStack, partialTicks, screenWidth, screenHeight) -> {
-//            Minecraft minecraft = Minecraft.getInstance();
-//            Window window = minecraft.getWindow();
-//            LocalPlayer player = minecraft.player;
-//            if (player != null) {
-//                renderRepulsionOverlay(pStack, minecraft, window, AetherPlayer.get(player));
-//            }
-//        });
-//        event.registerAboveAll("hammer_cooldown", (gui, pStack, partialTicks, screenWidth, screenHeight) -> {
-//            Minecraft minecraft = Minecraft.getInstance();
-//            Window window = minecraft.getWindow();
-//            LocalPlayer player = minecraft.player;
-//            if (player != null) {
-//                renderHammerCooldownOverlay(pStack, minecraft, window, player);
-//            }
-//        });
-//        event.registerAboveAll("moa_jumps", (gui, pStack, partialTicks, screenWidth, screenHeight) -> {
-//            Minecraft minecraft = Minecraft.getInstance();
-//            Window window = minecraft.getWindow();
-//            LocalPlayer player = minecraft.player;
-//            if (player != null) {
-//                renderMoaJumps(pStack, window, player);
-//            }
-//        });
-//        event.registerAbove(new ResourceLocation("player_health"), "silver_life_shard_hearts", (gui, pStack, partialTicks, screenWidth, screenHeight) -> {
+        HudRenderCallback.EVENT.register((guiGraphics, partialTicks) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            Window window = minecraft.getWindow();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                renderAetherPortalOverlay(guiGraphics, minecraft, window, AetherPlayer.get(player), partialTicks);
+            }
+        });
+        HudRenderCallback.EVENT.register((guiGraphics, partialTicks) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            Window window = minecraft.getWindow();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                renderInebriationOverlay(guiGraphics, minecraft, window, AetherPlayer.get(player));
+            }
+        });
+        HudRenderCallback.EVENT.register((guiGraphics, partialTicks) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            Window window = minecraft.getWindow();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                renderRemedyOverlay(guiGraphics, minecraft, window, AetherPlayer.get(player));
+            }
+        });
+        HudRenderCallback.EVENT.register((guiGraphics, partialTicks) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            Window window = minecraft.getWindow();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                renderRepulsionOverlay(guiGraphics, minecraft, window, AetherPlayer.get(player));
+            }
+        });
+        HudRenderCallback.EVENT.register((guiGraphics, partialTicks) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            Window window = minecraft.getWindow();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                renderHammerCooldownOverlay(guiGraphics, minecraft, window, player);
+            }
+        });
+        HudRenderCallback.EVENT.register((guiGraphics, partialTicks) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            Window window = minecraft.getWindow();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                renderMoaJumps(guiGraphics, window, player);
+            }
+        });
+//        HudRenderCallback.EVENT.register(new ResourceLocation("player_health"), "silver_life_shard_hearts", (gui, pStack, partialTicks, screenWidth, screenHeight) -> { //todo
 //            Minecraft minecraft = Minecraft.getInstance();
 //            LocalPlayer player = minecraft.player;
 //            if (player != null) {

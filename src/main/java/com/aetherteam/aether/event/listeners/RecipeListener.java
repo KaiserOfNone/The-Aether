@@ -1,15 +1,16 @@
 package com.aetherteam.aether.event.listeners;
 
-import com.aetherteam.aether.Aether;
 import com.aetherteam.aether.event.AetherEvents;
 import com.aetherteam.aether.event.FreezeEvent;
 import com.aetherteam.aether.event.PlacementBanEvent;
 import com.aetherteam.aether.event.PlacementConvertEvent;
 import com.aetherteam.aether.event.hooks.RecipeHooks;
 import io.github.fabricators_of_create.porting_lib.event.common.BlockEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -17,23 +18,17 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class RecipeListener {
-//    /** TODO: PORT
-//     * @see RecipeHooks#checkInteractionBanned(Player, Level, BlockPos, Direction, ItemStack, BlockState, boolean)
-//     */
-//    @SubscribeEvent
-//    public static void checkBanned(PlayerInteractEvent.RightClickBlock event) {
-//        Player player = event.getEntity();
-//        Level level = event.getLevel();
-//        BlockPos blockPos = event.getPos();
-//        Direction direction = event.getFace();
-//        InteractionHand interactionHand = event.getHand();
-//        ItemStack itemStack = player.getItemInHand(interactionHand);
-//        if (itemStack.isEmpty()) {
-//            itemStack = player.getItemInHand(interactionHand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
-//        }
-//        BlockState blockState = level.getBlockState(blockPos);
-//        event.setCanceled(RecipeHooks.checkInteractionBanned(player, level, blockPos, direction, itemStack, blockState, !player.getItemInHand(interactionHand).isEmpty()));
-//    }
+    /**
+     * @see RecipeHooks#checkInteractionBanned(Player, Level, BlockPos, Direction, ItemStack, BlockState, boolean)
+     */
+    public static InteractionResult checkBanned(Player player, Level level, BlockPos blockPos, Direction direction, InteractionHand interactionHand) {
+        ItemStack itemStack = player.getItemInHand(interactionHand);
+        if (itemStack.isEmpty()) {
+            itemStack = player.getItemInHand(interactionHand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+        }
+        BlockState blockState = level.getBlockState(blockPos);
+        return RecipeHooks.checkInteractionBanned(player, level, blockPos, direction, itemStack, blockState, !player.getItemInHand(interactionHand).isEmpty());
+    }
 
     /**
      * @see RecipeHooks#checkExistenceBanned(LevelAccessor, BlockPos)
@@ -80,6 +75,7 @@ public class RecipeListener {
     }
 
     public static void init() {
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> RecipeListener.checkBanned(player, world, hitResult.getBlockPos(), hitResult.getDirection(), hand));
         BlockEvents.NEIGHBORS_NOTIFY.register(RecipeListener::onNeighborNotified);
         FreezeEvent.FREEZE_FROM_BLOCK.register(RecipeListener::onBlockFreeze);
         PlacementConvertEvent.EVENT.register(AetherEvents.LOWEST, RecipeListener::onConvert);
