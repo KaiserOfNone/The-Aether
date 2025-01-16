@@ -31,7 +31,9 @@ import com.aetherteam.aether.entity.projectile.weapon.ThrownLightningKnife;
 import io.github.fabricators_of_create.porting_lib.util.LazyRegistrar;
 import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -42,122 +44,122 @@ public class AetherEntityTypes {
 
     // Passive Mobs
     public static final RegistryObject<EntityType<Phyg>> PHYG = ENTITY_TYPES.register("phyg",
-            () -> EntityType.Builder.of(Phyg::new, MobCategory.CREATURE).sized(0.9F, 0.9F).clientTrackingRange(10).build("phyg"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.CREATURE, Phyg::new).dimensions(EntityDimensions.scalable(0.9F, 0.9F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<FlyingCow>> FLYING_COW = ENTITY_TYPES.register("flying_cow",
-            () -> EntityType.Builder.of(FlyingCow::new, MobCategory.CREATURE).sized(0.9F, 1.4F).clientTrackingRange(10).build("flying_cow"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.CREATURE, FlyingCow::new).dimensions(EntityDimensions.scalable(0.9F, 1.4F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<Sheepuff>> SHEEPUFF = ENTITY_TYPES.register("sheepuff",
-            () -> EntityType.Builder.of(Sheepuff::new, MobCategory.CREATURE).sized(0.9F, 1.3F).clientTrackingRange(10).build("sheepuff"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.CREATURE, Sheepuff::new).dimensions(EntityDimensions.scalable(0.9F, 1.3F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<Moa>> MOA = ENTITY_TYPES.register("moa",
-            () -> EntityType.Builder.of(Moa::new, MobCategory.CREATURE).sized(0.9F, 2.15F).clientTrackingRange(10).build("moa"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.CREATURE, Moa::new).dimensions(EntityDimensions.scalable(0.9F, 2.15F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<Aerbunny>> AERBUNNY = ENTITY_TYPES.register("aerbunny",
-            () -> EntityType.Builder.of(Aerbunny::new, MobCategory.CREATURE).sized(0.6F, 0.5F).clientTrackingRange(10).build("aerbunny"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.CREATURE, Aerbunny::new).dimensions(EntityDimensions.scalable(0.6F, 0.5F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<Aerwhale>> AERWHALE = ENTITY_TYPES.register("aerwhale",
-            () -> EntityType.Builder.of(Aerwhale::new, AetherMobCategory.AETHER_AERWHALE).fireImmune().sized(3.0F, 3.0F).clientTrackingRange(10).build("aerwhale"));
+            () -> FabricEntityTypeBuilder.create(AetherMobCategory.AETHER_AERWHALE, Aerwhale::new).fireImmune().dimensions(EntityDimensions.scalable(3.0F, 3.0F)).trackRangeChunks(10).build());
 
     // Hostile Mobs
     public static final RegistryObject<EntityType<Swet>> BLUE_SWET = ENTITY_TYPES.register("blue_swet",
-            () -> EntityType.Builder.of(Swet::new, AetherMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 0.9F).clientTrackingRange(10).build("blue_swet"));
+            () -> FabricEntityTypeBuilder.create(AetherMobCategory.AETHER_SURFACE_MONSTER, Swet::new).dimensions(EntityDimensions.scalable(0.9F, 0.9F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<Swet>> GOLDEN_SWET = ENTITY_TYPES.register("golden_swet",
-            () -> EntityType.Builder.of(Swet::new, AetherMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 0.9F).clientTrackingRange(10).build("golden_swet"));
+            () -> FabricEntityTypeBuilder.create(AetherMobCategory.AETHER_SURFACE_MONSTER, Swet::new).dimensions(EntityDimensions.scalable(0.9F, 0.9F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<PassiveWhirlwind>> WHIRLWIND = ENTITY_TYPES.register("whirlwind",
-            () -> EntityType.Builder.of(PassiveWhirlwind::new, AetherMobCategory.AETHER_SURFACE_MONSTER).fireImmune().sized(0.6F, 0.8F).clientTrackingRange(8).build("whirlwind"));
+            () -> FabricEntityTypeBuilder.create(AetherMobCategory.AETHER_SURFACE_MONSTER, PassiveWhirlwind::new).fireImmune().dimensions(EntityDimensions.scalable(0.6F, 0.8F)).trackRangeChunks(8).build());
 
     public static final RegistryObject<EntityType<EvilWhirlwind>> EVIL_WHIRLWIND = ENTITY_TYPES.register("evil_whirlwind",
-            () -> EntityType.Builder.of(EvilWhirlwind::new, AetherMobCategory.AETHER_SURFACE_MONSTER).fireImmune().sized(0.6F, 0.8F).clientTrackingRange(8).build("evil_whirlwind"));
+            () -> FabricEntityTypeBuilder.create(AetherMobCategory.AETHER_SURFACE_MONSTER, EvilWhirlwind::new).fireImmune().dimensions(EntityDimensions.scalable(0.6F, 0.8F)).trackRangeChunks(8).build());
 
     public static final RegistryObject<EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
-            () -> EntityType.Builder.of(AechorPlant::new, AetherMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 1.0F).clientTrackingRange(8).build("aechor_plant"));
+            () -> FabricEntityTypeBuilder.create(AetherMobCategory.AETHER_SURFACE_MONSTER, AechorPlant::new).dimensions(EntityDimensions.scalable(1.0F, 1.0F)).trackRangeChunks(8).build());
 
     public static final RegistryObject<EntityType<Cockatrice>> COCKATRICE = ENTITY_TYPES.register("cockatrice",
-            () -> EntityType.Builder.of(Cockatrice::new, AetherMobCategory.AETHER_DARKNESS_MONSTER).sized(0.9F, 2.15F).clientTrackingRange(10).build("cockatrice"));
+            () -> FabricEntityTypeBuilder.create(AetherMobCategory.AETHER_DARKNESS_MONSTER, Cockatrice::new).dimensions(EntityDimensions.scalable(0.9F, 2.15F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<Zephyr>> ZEPHYR = ENTITY_TYPES.register("zephyr",
-            () -> EntityType.Builder.of(Zephyr::new, AetherMobCategory.AETHER_SKY_MONSTER).sized(4.5F, 3.5F).clientTrackingRange(10).build("zephyr"));
+            () -> FabricEntityTypeBuilder.create(AetherMobCategory.AETHER_SKY_MONSTER, Zephyr::new).dimensions(EntityDimensions.scalable(4.5F, 3.5F)).trackRangeChunks(10).build());
 
     // Dungeon Mobs
     public static final RegistryObject<EntityType<Mimic>> MIMIC = ENTITY_TYPES.register("mimic",
-            () -> EntityType.Builder.of(Mimic::new, MobCategory.MONSTER).sized(1.0F, 2.0F).clientTrackingRange(8).build("mimic"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.MONSTER, Mimic::new).dimensions(EntityDimensions.scalable(1.0F, 2.0F)).trackRangeChunks(8).build());
 
     public static final RegistryObject<EntityType<Sentry>> SENTRY = ENTITY_TYPES.register("sentry",
-            () -> EntityType.Builder.of(Sentry::new, MobCategory.MONSTER).sized(2.0F, 2.0F).clientTrackingRange(10).build("sentry"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.MONSTER, Sentry::new).dimensions(EntityDimensions.scalable(2.0F, 2.0F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<Slider>> SLIDER = ENTITY_TYPES.register("slider",
-            () -> EntityType.Builder.of(Slider::new, MobCategory.MONSTER).sized(2.0F, 2.0F).fireImmune().clientTrackingRange(10).build("slider"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.MONSTER, Slider::new).dimensions(EntityDimensions.scalable(2.0F, 2.0F)).fireImmune().trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<Valkyrie>> VALKYRIE = ENTITY_TYPES.register("valkyrie",
-            () -> EntityType.Builder.of(Valkyrie::new, MobCategory.MONSTER).sized(0.8F, 1.95F).clientTrackingRange(8).build("valkyrie"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.MONSTER, Valkyrie::new).dimensions(EntityDimensions.scalable(0.8F, 1.95F)).trackRangeChunks(8).build());
 
     public static final RegistryObject<EntityType<ValkyrieQueen>> VALKYRIE_QUEEN = ENTITY_TYPES.register("valkyrie_queen",
-            () -> EntityType.Builder.of(ValkyrieQueen::new, MobCategory.MONSTER).sized(0.8F, 1.95F).fireImmune().clientTrackingRange(10).build("valkyrie_queen"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.MONSTER, ValkyrieQueen::new).dimensions(EntityDimensions.scalable(0.8F, 1.95F)).fireImmune().trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<FireMinion>> FIRE_MINION = ENTITY_TYPES.register("fire_minion",
-            () -> EntityType.Builder.of(FireMinion::new, MobCategory.MONSTER).sized(1.1F, 1.95F).fireImmune().clientTrackingRange(8).build("fire_minion"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.MONSTER, FireMinion::new).dimensions(EntityDimensions.scalable(1.1F, 1.95F)).fireImmune().trackRangeChunks(8).build());
 
     public static final RegistryObject<EntityType<SunSpirit>> SUN_SPIRIT = ENTITY_TYPES.register("sun_spirit",
-            () -> EntityType.Builder.of(SunSpirit::new, MobCategory.MONSTER).sized(2.5F, 3.4F).fireImmune().clientTrackingRange(10).build("sun_spirit"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.MONSTER, SunSpirit::new).dimensions(EntityDimensions.scalable(2.5F, 3.4F)).fireImmune().trackRangeChunks(10).build());
 
     // Miscellaneous Entities
     public static final RegistryObject<EntityType<SkyrootBoat>> SKYROOT_BOAT = ENTITY_TYPES.register("skyroot_boat",
-            () -> EntityType.Builder.<SkyrootBoat>of(SkyrootBoat::new, MobCategory.MISC).sized(1.375F, 0.5625F).clientTrackingRange(10).build("skyroot_boat"));
+            () -> FabricEntityTypeBuilder.<SkyrootBoat>create(MobCategory.MISC, SkyrootBoat::new).dimensions(EntityDimensions.scalable(1.375F, 0.5625F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<SkyrootChestBoat>> SKYROOT_CHEST_BOAT = ENTITY_TYPES.register("skyroot_chest_boat",
-            () -> EntityType.Builder.<SkyrootChestBoat>of(SkyrootChestBoat::new, MobCategory.MISC).sized(1.375F, 0.5625F).clientTrackingRange(10).build("skyroot_boat"));
+            () -> FabricEntityTypeBuilder.<SkyrootChestBoat>create(MobCategory.MISC, SkyrootChestBoat::new).dimensions(EntityDimensions.scalable(1.375F, 0.5625F)).trackRangeChunks(10).build());
 
     public static final RegistryObject<EntityType<CloudMinion>> CLOUD_MINION = ENTITY_TYPES.register("cloud_minion",
-            () -> EntityType.Builder.<CloudMinion>of(CloudMinion::new, MobCategory.MISC).sized(0.75F, 0.75F).clientTrackingRange(5).build("cloud_minion"));
+            () -> FabricEntityTypeBuilder.<CloudMinion>create(MobCategory.MISC, CloudMinion::new).dimensions(EntityDimensions.scalable(0.75F, 0.75F)).trackRangeChunks(5).build());
 
     public static final RegistryObject<EntityType<Parachute>> COLD_PARACHUTE = ENTITY_TYPES.register("cold_parachute",
-            () -> EntityType.Builder.of(Parachute::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build("cold_parachute"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.MISC, Parachute::new).dimensions(EntityDimensions.scalable(1.0F, 1.0F)).trackRangeChunks(8).build());
 
     public static final RegistryObject<EntityType<Parachute>> GOLDEN_PARACHUTE = ENTITY_TYPES.register("golden_parachute",
-            () -> EntityType.Builder.of(Parachute::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(8).build("golden_parachute"));
+            () -> FabricEntityTypeBuilder.create(MobCategory.MISC, Parachute::new).dimensions(EntityDimensions.scalable(1.0F, 1.0F)).trackRangeChunks(8).build());
 
     public static final RegistryObject<EntityType<FloatingBlockEntity>> FLOATING_BLOCK = ENTITY_TYPES.register("floating_block",
-            () -> EntityType.Builder.<FloatingBlockEntity>of(FloatingBlockEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(10).updateInterval(20).build("floating_block"));
+            () -> FabricEntityTypeBuilder.<FloatingBlockEntity>create(MobCategory.MISC, FloatingBlockEntity::new).dimensions(EntityDimensions.scalable(1.0F, 1.0F)).trackRangeChunks(10).trackedUpdateRate(20).build());
 
     public static final RegistryObject<EntityType<TntPresent>> TNT_PRESENT = ENTITY_TYPES.register("tnt_present",
-            () -> EntityType.Builder.<TntPresent>of(TntPresent::new, MobCategory.MISC).fireImmune().sized(1.0F, 1.0F).clientTrackingRange(10).updateInterval(10).build("tnt_present"));
+            () -> FabricEntityTypeBuilder.<TntPresent>create(MobCategory.MISC, TntPresent::new).fireImmune().dimensions(EntityDimensions.scalable(1.0F, 1.0F)).trackRangeChunks(10).trackedUpdateRate(10).build());
 
     // Projectiles
     public static final RegistryObject<EntityType<ZephyrSnowball>> ZEPHYR_SNOWBALL = ENTITY_TYPES.register("zephyr_snowball",
-            () -> EntityType.Builder.<ZephyrSnowball>of(ZephyrSnowball::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(4).updateInterval(10).build("zephyr_snowball"));
+            () -> FabricEntityTypeBuilder.<ZephyrSnowball>create(MobCategory.MISC, ZephyrSnowball::new).dimensions(EntityDimensions.scalable(1.0F, 1.0F)).trackRangeChunks(4).trackedUpdateRate(10).build());
 
     public static final RegistryObject<EntityType<CloudCrystal>> CLOUD_CRYSTAL = ENTITY_TYPES.register("cloud_crystal",
-            () -> EntityType.Builder.<CloudCrystal>of(CloudCrystal::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(10).build("cloud_crystal"));
+            () -> FabricEntityTypeBuilder.<CloudCrystal>create(MobCategory.MISC, CloudCrystal::new).dimensions(EntityDimensions.scalable(0.5F, 0.5F)).trackRangeChunks(4).trackedUpdateRate(10).build());
 
     public static final RegistryObject<EntityType<FireCrystal>> FIRE_CRYSTAL = ENTITY_TYPES.register("fire_crystal",
-            () -> EntityType.Builder.<FireCrystal>of(FireCrystal::new, MobCategory.MISC).sized(0.85F, 0.85F).clientTrackingRange(4).updateInterval(10).fireImmune().build("fire_crystal"));
+            () -> FabricEntityTypeBuilder.<FireCrystal>create(MobCategory.MISC, FireCrystal::new).dimensions(EntityDimensions.scalable(0.85F, 0.85F)).trackRangeChunks(4).trackedUpdateRate(10).fireImmune().build());
 
     public static final RegistryObject<EntityType<IceCrystal>> ICE_CRYSTAL = ENTITY_TYPES.register("ice_crystal",
-            () -> EntityType.Builder.<IceCrystal>of(IceCrystal::new, MobCategory.MISC).sized(1.2F, 1.2F).clientTrackingRange(4).updateInterval(10).fireImmune().build("ice_crystal"));
+            () -> FabricEntityTypeBuilder.<IceCrystal>create(MobCategory.MISC, IceCrystal::new).dimensions(EntityDimensions.scalable(1.2F, 1.2F)).trackRangeChunks(4).trackedUpdateRate(10).fireImmune().build());
 
     public static final RegistryObject<EntityType<ThunderCrystal>> THUNDER_CRYSTAL = ENTITY_TYPES.register("thunder_crystal",
-            () -> EntityType.Builder.<ThunderCrystal>of(ThunderCrystal::new, MobCategory.MISC).sized(0.7F, 0.7F).updateInterval(2).build("thunder_crystal"));
+            () -> FabricEntityTypeBuilder.<ThunderCrystal>create(MobCategory.MISC, ThunderCrystal::new).dimensions(EntityDimensions.scalable(0.7F, 0.7F)).trackedUpdateRate(2).build());
 
     public static final RegistryObject<EntityType<GoldenDart>> GOLDEN_DART = ENTITY_TYPES.register("golden_dart",
-            () -> EntityType.Builder.<GoldenDart>of(GoldenDart::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("golden_dart"));
+            () -> FabricEntityTypeBuilder.<GoldenDart>create(MobCategory.MISC, GoldenDart::new).dimensions(EntityDimensions.scalable(0.5F, 0.5F)).trackRangeChunks(4).trackedUpdateRate(20).build());
 
     public static final RegistryObject<EntityType<PoisonDart>> POISON_DART = ENTITY_TYPES.register("poison_dart",
-            () -> EntityType.Builder.<PoisonDart>of(PoisonDart::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("poison_dart"));
+            () -> FabricEntityTypeBuilder.<PoisonDart>create(MobCategory.MISC, PoisonDart::new).dimensions(EntityDimensions.scalable(0.5F, 0.5F)).trackRangeChunks(4).trackedUpdateRate(20).build());
 
     public static final RegistryObject<EntityType<EnchantedDart>> ENCHANTED_DART = ENTITY_TYPES.register("enchanted_dart",
-            () -> EntityType.Builder.<EnchantedDart>of(EnchantedDart::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("enchanted_dart"));
+            () -> FabricEntityTypeBuilder.<EnchantedDart>create(MobCategory.MISC, EnchantedDart::new).dimensions(EntityDimensions.scalable(0.5F, 0.5F)).trackRangeChunks(4).trackedUpdateRate(20).build());
 
     public static final RegistryObject<EntityType<PoisonNeedle>> POISON_NEEDLE = ENTITY_TYPES.register("poison_needle",
-            () -> EntityType.Builder.<PoisonNeedle>of(PoisonNeedle::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("poison_needle"));
+            () -> FabricEntityTypeBuilder.<PoisonNeedle>create(MobCategory.MISC, PoisonNeedle::new).dimensions(EntityDimensions.scalable(0.5F, 0.5F)).trackRangeChunks(4).trackedUpdateRate(20).build());
 
     public static final RegistryObject<EntityType<ThrownLightningKnife>> LIGHTNING_KNIFE = ENTITY_TYPES.register("lightning_knife",
-            () -> EntityType.Builder.<ThrownLightningKnife>of(ThrownLightningKnife::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("lightning_knife"));
+            () -> FabricEntityTypeBuilder.<ThrownLightningKnife>create(MobCategory.MISC, ThrownLightningKnife::new).dimensions(EntityDimensions.scalable(0.25F, 0.25F)).trackRangeChunks(4).trackedUpdateRate(10).build());
 
     public static final RegistryObject<EntityType<HammerProjectile>> HAMMER_PROJECTILE = ENTITY_TYPES.register("hammer_projectile",
-            () -> EntityType.Builder.<HammerProjectile>of(HammerProjectile::new, MobCategory.MISC).sized(0.35F, 0.35F).clientTrackingRange(4).updateInterval(10).build("hammer_projectile"));
+            () -> FabricEntityTypeBuilder.<HammerProjectile>create(MobCategory.MISC, HammerProjectile::new).dimensions(EntityDimensions.scalable(0.35F, 0.35F)).trackRangeChunks(4).trackedUpdateRate(10).build());
 
     public static void registerSpawnPlacements() {
         // Passive Mobs
