@@ -1,3 +1,9 @@
+# The Aether - NeoForge - 1.21.1-1.5.3
+
+Fixes
+
+- Fix crash when fighting the Sun Spirit with Twilight Forest installed.
+
 # The Aether - NeoForge - 1.21.1-1.5.2
 
 Fixes
