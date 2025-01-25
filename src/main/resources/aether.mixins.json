@@ -140,7 +140,8 @@
     "client.accessor.SoundEngineAccessor",
     "client.accessor.TitleScreenAccessor",
     "client.fabric.NetworkRegisterHelperMixin",
-    "client.optifine.BossHealthOverlayMixin"
+    "client.optifine.BossHealthOverlayMixin",
+    "client.CreateWorldScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
