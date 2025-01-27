@@ -11,6 +11,7 @@ import com.aetherteam.aether.client.gui.screen.perks.MoaSkinsScreen;
 import com.aetherteam.aether.entity.AetherBossMob;
 import com.aetherteam.aether.event.hooks.DimensionHooks;
 import com.aetherteam.aether.inventory.menu.AccessoriesMenu;
+import com.aetherteam.aether.mixin.mixins.client.accessor.CreativeModeInventoryScreenAccessor;
 import com.aetherteam.aether.network.AetherPacketHandler;
 import com.aetherteam.aether.network.packet.serverbound.OpenAccessoriesPacket;
 import com.aetherteam.aether.perk.PerkUtil;
@@ -42,6 +43,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.BossEvent;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -287,9 +289,14 @@ public class GuiHooks {
      */
     public static void closeContainerMenu(int key, int action) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.screen instanceof AbstractContainerScreen abstractContainerScreen) {
-            if (!AetherConfig.CLIENT.disable_accessory_button.get() && KeyBindingHelper.getBoundKeyOf(AetherKeys.OPEN_ACCESSORY_INVENTORY).getValue() == key && (action == InputConstants.PRESS || action == InputConstants.REPEAT)) {
-                abstractContainerScreen.onClose();
+        if (!(minecraft.screen instanceof CreativeModeInventoryScreen creativeModeInventoryScreen)
+                || CreativeModeInventoryScreenAccessor.aether$getSelectedTab().getType() != CreativeModeTab.Type.SEARCH
+                || !((CreativeModeInventoryScreenAccessor) creativeModeInventoryScreen).aether$getSearchBox().isFocused()
+                || !((CreativeModeInventoryScreenAccessor) creativeModeInventoryScreen).aether$getSearchBox().isVisible()) {
+            if (minecraft.screen instanceof AbstractContainerScreen abstractContainerScreen) {
+                if (!AetherConfig.CLIENT.disable_accessory_button.get() && KeyBindingHelper.getBoundKeyOf(AetherKeys.OPEN_ACCESSORY_INVENTORY).getValue() == key && (action == InputConstants.PRESS || action == InputConstants.REPEAT)) {
+                    abstractContainerScreen.onClose();
+                }
             }
         }
     }

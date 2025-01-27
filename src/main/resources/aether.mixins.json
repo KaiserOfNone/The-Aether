@@ -49,6 +49,7 @@
     "client.ConnectScreenMixin",
     "client.CreateWorldScreenMixin",
     "client.ElytraLayerMixin",
+    "client.FogRendererMixin",
     "client.PanoramaRendererMixin",
     "client.PauseScreenMixin",
     "client.SmithingScreenMixin",
@@ -58,6 +59,7 @@
     "client.WorldOpenFlowsMixin",
     "client.accessor.BossHealthOverlayAccessor",
     "client.accessor.ButtonAccessor",
+    "client.accessor.CreativeModeInventoryScreenAccessor",
     "client.accessor.EntityRendererAccessor",
     "client.accessor.GuiAccessor",
     "client.accessor.HeartTypeAccessor",
@@ -70,8 +72,7 @@
     "client.accessor.SoundEngineAccessor",
     "client.accessor.TitleScreenAccessor",
     "client.fabric.LocalPlayerMixin",
-    "client.optifine.BossHealthOverlayMixin",
-    "client.FogRendererMixin"
+    "client.optifine.BossHealthOverlayMixin"
   ],
   "injectors": {
     "defaultRequire": 1
