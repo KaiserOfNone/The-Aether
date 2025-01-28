@@ -128,5 +128,13 @@ public class QuarkCompat {
         private static boolean isInventoryGUI(Screen gui) {
             return gui != null && gui.getClass() == AccessoriesScreen.class;
         }
+
+        public static boolean isAccessoriesBackpackGUI(Screen gui) {
+            return gui instanceof AccessoriesBackpackScreen;
+        }
+
+        public static boolean isAccessoriesBackpackClass(Screen gui) {
+            return gui.getClass() == AccessoriesBackpackScreen.class;
+        }
     }
 }

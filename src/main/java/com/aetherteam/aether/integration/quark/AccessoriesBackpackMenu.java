@@ -1,5 +1,6 @@
 package com.aetherteam.aether.integration.quark;
 
+import com.aetherteam.aether.inventory.menu.AccessoriesButtonMenu;
 import com.aetherteam.aether.inventory.menu.AccessoriesMenu;
 import com.aetherteam.aether.inventory.menu.AetherMenuTypes;
 import com.aetherteam.aether.mixin.mixins.common.accessor.AbstractContainerMenuAccessor;
@@ -40,7 +41,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-public class AccessoriesBackpackMenu extends BackpackMenu {
+public class AccessoriesBackpackMenu extends BackpackMenu implements AccessoriesButtonMenu {
     private static final ResourceLocation[] ARMOR_SLOT_TEXTURES = new ResourceLocation[] {
             InventoryMenu.EMPTY_ARMOR_SLOT_BOOTS,
             InventoryMenu.EMPTY_ARMOR_SLOT_LEGGINGS,
@@ -356,5 +357,10 @@ public class AccessoriesBackpackMenu extends BackpackMenu {
     @Override
     public @NotNull MenuType<?> getType() {
         return QuarkCompat.Common.ACCESSORIES_BACKPACK.get();
+    }
+
+    @Override
+    public boolean hasButton() {
+        return this.hasButton;
     }
 }

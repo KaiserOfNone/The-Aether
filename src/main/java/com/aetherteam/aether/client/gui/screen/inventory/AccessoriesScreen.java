@@ -5,7 +5,7 @@ import com.aetherteam.aether.AetherConfig;
 import com.aetherteam.aether.client.AetherKeys;
 import com.aetherteam.aether.client.gui.screen.perks.AetherCustomizationsScreen;
 import com.aetherteam.aether.client.gui.screen.perks.MoaSkinsScreen;
-import com.aetherteam.aether.integration.quark.AccessoriesBackpackScreen;
+import com.aetherteam.aether.integration.quark.QuarkCompat;
 import com.aetherteam.aether.inventory.menu.AccessoriesMenu;
 import com.aetherteam.aether.mixin.mixins.client.accessor.ScreenAccessor;
 import com.aetherteam.aether.network.AetherPacketHandler;
@@ -35,6 +35,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.PacketDistributor;
 import top.theillusivec4.curios.Curios;
 import top.theillusivec4.curios.client.gui.CuriosScreen;
@@ -400,7 +401,7 @@ public class AccessoriesScreen extends EffectRenderingInventoryScreen<Accessorie
             x = AetherConfig.CLIENT.button_creative_x.get();
             y = AetherConfig.CLIENT.button_creative_y.get();
         }
-        if (screen instanceof AccessoriesScreen || screen instanceof AccessoriesBackpackScreen) {
+        if (screen instanceof AccessoriesScreen || (ModList.get().isLoaded("quark") && QuarkCompat.ClientForge.isAccessoriesBackpackGUI(screen))) {
             x = AetherConfig.CLIENT.button_accessories_x.get();
             y = AetherConfig.CLIENT.button_accessories_y.get();
         }

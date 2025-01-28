@@ -37,7 +37,7 @@ import java.util.Set;
  * [CODE COPY] - {@link top.theillusivec4.curios.common.inventory.container.CuriosContainer}<br><br>
  * Heavily adapted to only set up Aether curio types.
  */
-public class AccessoriesMenu extends InventoryMenu {
+public class AccessoriesMenu extends InventoryMenu implements AccessoriesButtonMenu {
     private static final ResourceLocation[] ARMOR_SLOT_TEXTURES = new ResourceLocation[] {
             InventoryMenu.EMPTY_ARMOR_SLOT_BOOTS,
             InventoryMenu.EMPTY_ARMOR_SLOT_LEGGINGS,
@@ -332,5 +332,10 @@ public class AccessoriesMenu extends InventoryMenu {
     @Override
     public RecipeBookType getRecipeBookType() {
         return RecipeBookType.CRAFTING;
+    }
+
+    @Override
+    public boolean hasButton() {
+        return this.hasButton;
     }
 }

@@ -10,7 +10,7 @@ import com.aetherteam.aether.client.gui.screen.perks.AetherCustomizationsScreen;
 import com.aetherteam.aether.client.gui.screen.perks.MoaSkinsScreen;
 import com.aetherteam.aether.entity.AetherBossMob;
 import com.aetherteam.aether.event.hooks.DimensionHooks;
-import com.aetherteam.aether.integration.quark.AccessoriesBackpackScreen;
+import com.aetherteam.aether.integration.quark.QuarkCompat;
 import com.aetherteam.aether.inventory.menu.AccessoriesMenu;
 import com.aetherteam.aether.network.AetherPacketHandler;
 import com.aetherteam.aether.network.packet.serverbound.OpenAccessoriesPacket;
@@ -44,6 +44,7 @@ import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.tags.ITagManager;
 import top.theillusivec4.curios.client.gui.CuriosScreen;
@@ -112,9 +113,9 @@ public class GuiHooks {
      */
     @Nullable
     private static AbstractContainerScreen<?> canCreateAccessoryButtonForScreen(Screen screen) {
-        if (screen instanceof InventoryScreen || screen instanceof CuriosScreen || screen instanceof CreativeModeInventoryScreen || ((screen instanceof AccessoriesScreen || screen instanceof AccessoriesBackpackScreen) && shouldAddButton)) {
+        if (screen instanceof InventoryScreen || screen instanceof CuriosScreen || screen instanceof CreativeModeInventoryScreen || ((screen instanceof AccessoriesScreen || (ModList.get().isLoaded("quark") && QuarkCompat.ClientForge.isAccessoriesBackpackGUI(screen))) && shouldAddButton)) {
             return (AbstractContainerScreen<?>) screen;
-        } else if (screen instanceof AccessoriesScreen || screen instanceof AccessoriesBackpackScreen) {
+        } else if (screen instanceof AccessoriesScreen || (ModList.get().isLoaded("quark") && QuarkCompat.ClientForge.isAccessoriesBackpackGUI(screen))) {
             shouldAddButton = true;
         }
         return null;

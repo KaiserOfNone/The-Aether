@@ -1,8 +1,8 @@
 package com.aetherteam.aether.client.gui.component.inventory;
 
 import com.aetherteam.aether.client.gui.screen.inventory.AccessoriesScreen;
-import com.aetherteam.aether.integration.quark.AccessoriesBackpackMenu;
-import com.aetherteam.aether.integration.quark.AccessoriesBackpackScreen;
+import com.aetherteam.aether.integration.quark.QuarkCompat;
+import com.aetherteam.aether.inventory.menu.AccessoriesButtonMenu;
 import com.aetherteam.aether.network.AetherPacketHandler;
 import com.aetherteam.aether.network.packet.serverbound.OpenAccessoriesPacket;
 import com.aetherteam.aether.network.packet.serverbound.OpenInventoryPacket;
@@ -11,12 +11,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fml.ModList;
 
 /**
  * [CODE COPY] - {@link top.theillusivec4.curios.client.gui.CuriosButton}.<br><br>
@@ -34,7 +36,7 @@ public class AccessoryButton extends ImageButton {
                         ItemStack stack = player.containerMenu.getCarried();
                         player.containerMenu.setCarried(ItemStack.EMPTY);
 
-                        if (parentScreen instanceof AccessoriesScreen || parentScreen instanceof AccessoriesBackpackScreen) {
+                        if (parentScreen instanceof AccessoriesScreen || (ModList.get().isLoaded("quark") && QuarkCompat.ClientForge.isAccessoriesBackpackGUI(parentScreen))) {
                             InventoryScreen inventory = new InventoryScreen(player);
                             minecraft.setScreen(inventory);
                             player.inventoryMenu.setCarried(stack);
@@ -58,12 +60,8 @@ public class AccessoryButton extends ImageButton {
             if (isInventoryTab) {
                 super.render(guiGraphics, mouseX, mouseY, partialTicks);
             }
-        } else if (this.parentScreen instanceof AccessoriesScreen screen) {
-            if (screen.getMenu().hasButton) {
-                super.render(guiGraphics, mouseX, mouseY, partialTicks);
-            }
-        } else if (this.parentScreen instanceof AccessoriesBackpackScreen screen) {
-            if (((AccessoriesBackpackMenu) screen.getMenu()).hasButton) {
+        } else if (this.parentScreen instanceof ContainerScreen screen && screen.getMenu() instanceof AccessoriesButtonMenu accessoriesButtonMenu) {
+            if (accessoriesButtonMenu.hasButton()) {
                 super.render(guiGraphics, mouseX, mouseY, partialTicks);
             }
         } else {
