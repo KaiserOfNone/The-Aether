@@ -40,6 +40,13 @@
       "com.aetherteam.aether.AetherASM"
     ]
   },
+  "depends": {
+    "fabricloader": ">=0.16.7",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": ">=0.92.1+1.20.1",
+    "accessories": ">=1.0.0-beta.40+1.20.1"
+  },
   "custom": {
     "update_url": "https://github.com/The-Aether-Team/The-Aether/raw/1.20.1-develop/update.json",
     "cardinal-components": [
