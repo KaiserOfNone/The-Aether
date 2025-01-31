@@ -25,7 +25,7 @@ public record ZephyrSnowballHitPacket(int entityID, double xSpeed, double zSpeed
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && Minecraft.getInstance().player.level().getEntity(this.entityID()) instanceof LocalPlayer localPlayer) {
             if (!localPlayer.isBlocking()) {
                 localPlayer.setDeltaMovement(localPlayer.getDeltaMovement().x(), localPlayer.getDeltaMovement().y() + 0.5, localPlayer.getDeltaMovement().z());

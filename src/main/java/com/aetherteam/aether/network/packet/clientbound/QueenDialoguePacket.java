@@ -18,7 +18,7 @@ public record QueenDialoguePacket(int queenID) implements BasePacket {
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             if (Minecraft.getInstance().level.getEntity(this.queenID()) instanceof ValkyrieQueen valkyrieQueen) {
                 valkyrieQueen.openDialogueScreen();

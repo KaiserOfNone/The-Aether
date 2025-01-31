@@ -28,8 +28,8 @@ public record SunAltarUpdatePacket(long dayTime, int timeScale) implements BaseP
     }
 
     @Override
-    public void execute(@Nullable Player playerEntity) {
-        if (playerEntity != null && playerEntity.level() instanceof ServerLevel level && (!AetherConfig.SERVER.sun_altar_whitelist.get() || playerEntity.hasPermissions(4) || SunAltarWhitelist.INSTANCE.isWhiteListed(playerEntity.getGameProfile()))) {
+    public void executeServer(Player player) {
+        if (player != null && player.level() instanceof ServerLevel level && (!AetherConfig.SERVER.sun_altar_whitelist.get() || player.hasPermissions(4) || SunAltarWhitelist.INSTANCE.isWhiteListed(player.getGameProfile()))) {
             if (AetherConfig.SERVER.sun_altar_dimensions.get().contains(level.dimension().location().toString())) {
                 // Get how many days have passed in the world first, then add to it.
                 var dayBase = level.getDayTime() / (long) this.timeScale();

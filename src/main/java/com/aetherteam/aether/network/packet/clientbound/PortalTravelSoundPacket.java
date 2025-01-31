@@ -18,7 +18,7 @@ public record PortalTravelSoundPacket() implements BasePacket {
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             PortalSoundUtil.playPortalSound(Minecraft.getInstance().player);
         }

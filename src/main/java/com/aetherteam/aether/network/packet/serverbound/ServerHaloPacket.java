@@ -27,9 +27,9 @@ public class ServerHaloPacket {
         }
 
         @Override
-        public void execute(@Nullable Player playerEntity) {
-            if (playerEntity != null && playerEntity.getServer() != null && this.playerUUID() != null && this.halo() != null) {
-                ServerPerkData.HALO_INSTANCE.applyPerkWithVerification(playerEntity.getServer(), this.playerUUID(), this.halo());
+        public void executeServer(Player player) {
+            if (player != null && player.getServer() != null && this.playerUUID() != null && this.halo() != null) {
+                ServerPerkData.HALO_INSTANCE.applyPerkWithVerification(player.getServer(), this.playerUUID(), this.halo());
             }
         }
     }
@@ -49,9 +49,9 @@ public class ServerHaloPacket {
         }
 
         @Override
-        public void execute(@Nullable Player playerEntity) {
-            if (playerEntity != null && playerEntity.getServer() != null && this.playerUUID() != null) {
-                ServerPerkData.HALO_INSTANCE.removePerk(playerEntity.getServer(), this.playerUUID());
+        public void executeServer(Player player) {
+            if (player != null && player.getServer() != null && this.playerUUID() != null) {
+                ServerPerkData.HALO_INSTANCE.removePerk(player.getServer(), this.playerUUID());
             }
         }
     }

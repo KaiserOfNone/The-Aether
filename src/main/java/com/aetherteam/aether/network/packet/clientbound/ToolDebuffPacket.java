@@ -21,7 +21,7 @@ public record ToolDebuffPacket(boolean debuffTools) implements BasePacket {
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             AbilityHooks.ToolHooks.debuffTools = this.debuffTools();
         }

@@ -22,7 +22,7 @@ public record SetInvisibilityPacket(int playerID, boolean invisible) implements 
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             if (Minecraft.getInstance().level.getEntity(this.playerID()) instanceof Player player) {
                 player.setInvisible(this.invisible());

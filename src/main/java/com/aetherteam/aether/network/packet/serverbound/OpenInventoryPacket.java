@@ -27,8 +27,8 @@ public record OpenInventoryPacket(ItemStack carryStack) implements BasePacket {
     }
 
     @Override
-    public void execute(@Nullable Player playerEntity) {
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
+    public void executeServer(Player player) {
+        if (player != null && player.getServer() != null && player instanceof ServerPlayer serverPlayer) {
             ItemStack itemStack = serverPlayer.isCreative() ? this.carryStack() : serverPlayer.containerMenu.getCarried();
             serverPlayer.containerMenu.setCarried(ItemStack.EMPTY);
             serverPlayer.doCloseContainer();

@@ -27,9 +27,9 @@ public class ServerDeveloperGlowPacket {
         }
 
         @Override
-        public void execute(@Nullable Player playerEntity) {
-            if (playerEntity != null && playerEntity.getServer() != null && this.playerUUID() != null && this.developerGlow() != null) {
-                ServerPerkData.DEVELOPER_GLOW_INSTANCE.applyPerkWithVerification(playerEntity.getServer(), this.playerUUID(), this.developerGlow());
+        public void executeServer(Player player) {
+            if (player != null && player.getServer() != null && this.playerUUID() != null && this.developerGlow() != null) {
+                ServerPerkData.DEVELOPER_GLOW_INSTANCE.applyPerkWithVerification(player.getServer(), this.playerUUID(), this.developerGlow());
             }
         }
     }
@@ -49,9 +49,9 @@ public class ServerDeveloperGlowPacket {
         }
 
         @Override
-        public void execute(@Nullable Player playerEntity) {
-            if (playerEntity != null && playerEntity.getServer() != null && this.playerUUID() != null) {
-                ServerPerkData.DEVELOPER_GLOW_INSTANCE.removePerk(playerEntity.getServer(), this.playerUUID());
+        public void executeServer(Player player) {
+            if (player != null && player.getServer() != null && this.playerUUID() != null) {
+                ServerPerkData.DEVELOPER_GLOW_INSTANCE.removePerk(player.getServer(), this.playerUUID());
             }
         }
     }

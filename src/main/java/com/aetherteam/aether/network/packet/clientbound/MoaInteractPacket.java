@@ -24,7 +24,7 @@ public record MoaInteractPacket(int playerID, boolean mainHand) implements BaseP
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             Entity entity = Minecraft.getInstance().player.level().getEntity(this.playerID());
             if (entity instanceof Player player) {

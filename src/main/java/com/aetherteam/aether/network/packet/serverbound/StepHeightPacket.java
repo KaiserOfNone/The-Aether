@@ -24,8 +24,8 @@ public record StepHeightPacket(int entityID) implements BasePacket {
     }
 
     @Override
-    public void execute(@Nullable Player playerEntity) {
-        if (playerEntity != null && playerEntity.getServer() != null && playerEntity.level().getEntity(this.entityID()) instanceof MountableAnimal mountableAnimal) {
+    public void executeServer(Player player) {
+        if (player != null && player.getServer() != null && player.level().getEntity(this.entityID()) instanceof MountableAnimal mountableAnimal) {
             AttributeInstance stepHeight = mountableAnimal.getAttribute(PortingLibAttributes.STEP_HEIGHT_ADDITION);
             if (stepHeight != null) {
                 if (stepHeight.hasModifier(mountableAnimal.getDefaultStepHeightModifier())) {

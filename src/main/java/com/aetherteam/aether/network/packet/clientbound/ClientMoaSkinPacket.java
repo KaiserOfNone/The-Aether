@@ -28,7 +28,7 @@ public abstract class ClientMoaSkinPacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeClient() {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && this.playerUUID() != null && this.moaSkinData() != null) {
                 ClientMoaSkinPerkData.INSTANCE.applyPerk(this.playerUUID(), this.moaSkinData());
             }
@@ -50,7 +50,7 @@ public abstract class ClientMoaSkinPacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeClient() {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && this.playerUUID() != null) {
                 ClientMoaSkinPerkData.INSTANCE.removePerk(this.playerUUID());
             }
@@ -72,7 +72,7 @@ public abstract class ClientMoaSkinPacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeClient() {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && this.moaSkinsData() != null && !this.moaSkinsData().isEmpty()) {
                 for (Map.Entry<UUID, MoaData> moaSkinsDataEntry : this.moaSkinsData().entrySet()) {
                     ClientMoaSkinPerkData.INSTANCE.applyPerk(moaSkinsDataEntry.getKey(), moaSkinsDataEntry.getValue());

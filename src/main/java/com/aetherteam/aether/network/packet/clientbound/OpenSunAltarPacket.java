@@ -25,7 +25,7 @@ public record OpenSunAltarPacket(Component name, int timeScale) implements BaseP
     }
 
     @Override
-    public void execute(Player player) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             AetherClient.setToSunAltarScreen(this.name(), this.timeScale());
         }

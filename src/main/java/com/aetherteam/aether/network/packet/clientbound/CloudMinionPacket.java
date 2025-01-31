@@ -27,7 +27,7 @@ public record CloudMinionPacket(int entityID, int rightCloudMinionID, int leftCl
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             Level world = Minecraft.getInstance().player.level();
             if (world.getEntity(this.entityID()) instanceof Player player && world.getEntity(this.rightCloudMinionID()) instanceof CloudMinion cloudMinionRight && world.getEntity(this.leftCloudMinionID()) instanceof CloudMinion cloudMinionLeft) {

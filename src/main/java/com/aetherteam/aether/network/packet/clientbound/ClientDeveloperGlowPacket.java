@@ -28,7 +28,7 @@ public class ClientDeveloperGlowPacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeClient() {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && this.playerUUID() != null && this.developerGlow() != null) {
                 ClientDeveloperGlowPerkData.INSTANCE.applyPerk(this.playerUUID(), this.developerGlow());
             }
@@ -50,7 +50,7 @@ public class ClientDeveloperGlowPacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeClient() {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && this.playerUUID() != null) {
                 ClientDeveloperGlowPerkData.INSTANCE.removePerk(this.playerUUID());
             }
@@ -72,7 +72,7 @@ public class ClientDeveloperGlowPacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeClient() {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && this.developerGlows() != null && !this.developerGlows().isEmpty()) {
                 for (Map.Entry<UUID, DeveloperGlow> developerGlowEntry : this.developerGlows().entrySet()) {
                     ClientDeveloperGlowPerkData.INSTANCE.applyPerk(developerGlowEntry.getKey(), developerGlowEntry.getValue());

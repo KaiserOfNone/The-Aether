@@ -24,7 +24,7 @@ public record LeavingAetherPacket(boolean playerLeavingAether) implements BasePa
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             DimensionHooks.playerLeavingAether = this.playerLeavingAether();
         }

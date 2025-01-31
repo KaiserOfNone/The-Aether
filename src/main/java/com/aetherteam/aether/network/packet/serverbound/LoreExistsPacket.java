@@ -28,7 +28,7 @@ public record LoreExistsPacket(int playerID, ItemStack itemStack, boolean exists
     }
 
     @Override
-    public void execute(@Nullable Player player) {
+    public void executeServer(Player player) {
         if (player != null && player.getServer() != null && player.level().getEntity(this.playerID()) instanceof ServerPlayer && player.containerMenu instanceof LoreBookMenu menu) {
             menu.setLoreEntryExists(this.exists());
         }

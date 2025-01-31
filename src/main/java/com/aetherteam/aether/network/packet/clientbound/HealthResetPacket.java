@@ -26,7 +26,7 @@ public record HealthResetPacket(int entityID, int value) implements BasePacket {
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && Minecraft.getInstance().player.level().getEntity(this.entityID()) instanceof Player player) {
             AetherPlayer.getOptional(player).ifPresent(aetherPlayer -> {
                 aetherPlayer.setSynched(INBTSynchable.Direction.SERVER, "setLifeShardCount", this.value());

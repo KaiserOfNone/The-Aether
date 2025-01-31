@@ -22,7 +22,7 @@ public record ClientGrabItemPacket(ItemStack stack) implements BasePacket {
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             Minecraft.getInstance().player.containerMenu.setCarried(this.stack());
         }

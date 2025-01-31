@@ -40,7 +40,7 @@ public abstract class BossInfoPacket implements BasePacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeServer(Player player) {
             GuiHooks.BOSS_EVENTS.put(this.bossEvent, this.entityID);
         }
     }
@@ -60,7 +60,7 @@ public abstract class BossInfoPacket implements BasePacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeServer(Player player) {
             GuiHooks.BOSS_EVENTS.remove(this.bossEvent);
         }
     }

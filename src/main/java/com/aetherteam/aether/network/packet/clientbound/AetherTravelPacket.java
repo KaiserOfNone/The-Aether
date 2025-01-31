@@ -23,7 +23,7 @@ public record AetherTravelPacket(boolean displayAetherTravel) implements BasePac
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             DimensionHooks.displayAetherTravel = this.displayAetherTravel();
         }

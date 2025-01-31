@@ -23,10 +23,10 @@ public record HammerProjectileLaunchPacket(int targetID, int projectileID) imple
     }
 
     @Override
-    public void execute(Player playerEntity) {
-        if (playerEntity != null && playerEntity.getServer() != null) {
-            Entity target = playerEntity.level().getEntity(this.targetID());
-            Entity projectile = playerEntity.level().getEntity(this.projectileID());
+    public void executeServer(Player player) {
+        if (player != null && player.getServer() != null) {
+            Entity target = player.level().getEntity(this.targetID());
+            Entity projectile = player.level().getEntity(this.projectileID());
             if (projectile instanceof HammerProjectile hammerProjectile) {
                 hammerProjectile.launchTarget(target);
             }

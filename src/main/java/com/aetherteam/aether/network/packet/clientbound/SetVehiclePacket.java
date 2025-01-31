@@ -23,7 +23,7 @@ public record SetVehiclePacket(int passengerID, int vehicleID) implements BasePa
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public void executeClient() {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             Entity passenger = Minecraft.getInstance().player.level().getEntity(this.passengerID());
             Entity vehicle = Minecraft.getInstance().player.level().getEntity(this.vehicleID());

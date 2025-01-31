@@ -28,7 +28,7 @@ public class ClientHaloPacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeClient() {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && this.playerUUID() != null && this.halo() != null) {
                 ClientHaloPerkData.INSTANCE.applyPerk(this.playerUUID(), this.halo());
             }
@@ -50,7 +50,7 @@ public class ClientHaloPacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeClient() {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && this.playerUUID() != null) {
                 ClientHaloPerkData.INSTANCE.removePerk(this.playerUUID());
             }
@@ -72,7 +72,7 @@ public class ClientHaloPacket {
         }
 
         @Override
-        public void execute(Player playerEntity) {
+        public void executeClient() {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null && this.halos() != null && !this.halos().isEmpty()) {
                 for (Map.Entry<UUID, Halo> haloEntry : this.halos().entrySet()) {
                     ClientHaloPerkData.INSTANCE.applyPerk(haloEntry.getKey(), haloEntry.getValue());
