@@ -138,7 +138,6 @@ public class Aether implements ModInitializer {
 
         initEvents();
         AetherRecipeBookTypes.init();
-        AetherRecipeCategories.registerRecipeCategories();
         ReloadListeners.reloadListenerSetup();
     }
 
@@ -150,7 +149,6 @@ public class Aether implements ModInitializer {
         DimensionListener.init();
         AetherTimeListener.init();
         ToolAbilityListener.init();
-        AetherColorResolvers.init();
         AetherPlayerListener.init();
         ArmorAbilityListener.init();
         WeaponAbilityListener.init();

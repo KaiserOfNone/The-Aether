@@ -3,8 +3,11 @@ package com.aetherteam.aether.client.event.listeners;
 import com.aetherteam.aether.client.event.hooks.GuiHooks;
 import com.aetherteam.aether.client.gui.component.inventory.AccessoryButton;
 import com.aetherteam.aether.client.gui.screen.inventory.AccessoriesScreen;
+import com.aetherteam.aether.event.hooks.ItemHooks;
+import com.aetherteam.aether.event.listeners.ItemListener;
 import io.github.fabricators_of_create.porting_lib.event.client.KeyInputCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.fabricmc.loader.api.FabricLoader;
@@ -14,8 +17,11 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.BossEvent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 import java.util.UUID;
@@ -84,6 +90,10 @@ public class GuiListener {
 		return increment;
 	}
 
+	public static void onTooltipAdd(ItemStack itemStack, TooltipFlag tooltipFlag, List<Component> itemTooltips) {
+		ItemHooks.addDungeonTooltips(itemTooltips, itemStack, tooltipFlag);
+	}
+
 	public static void init() {
 		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
 			ScreenEvents.afterRender(screen).register(GuiListener::onGuiDraw);
@@ -91,5 +101,6 @@ public class GuiListener {
 		ScreenEvents.AFTER_INIT.register(GuiListener::onGuiInitialize);
 		ClientTickEvents.END_CLIENT_TICK.register(GuiListener::onClientTick);
 		KeyInputCallback.EVENT.register(GuiListener::onKeyPress);
+		ItemTooltipCallback.EVENT.register(GuiListener::onTooltipAdd);
 	}
 }
