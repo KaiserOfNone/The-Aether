@@ -1,3 +1,11 @@
+# The Aether - Fabric - 1.20.1-1.5.2-beta.3
+
+Fixes
+
+- Fix missing embedded Porting Lib module causing mixin crashes in some situations.
+- Fix Cumulus music mixin incompatibility.
+- Fix a mixin accessor warning.
+
 # The Aether - Fabric - 1.20.1-1.5.2-beta.2
 
 Fixes
