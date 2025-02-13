@@ -95,10 +95,10 @@ public class GuiListener {
 	}
 
 	public static void init() {
-		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
+		ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
+			onGuiInitialize(client, screen, scaledWidth, scaledHeight);
 			ScreenEvents.afterRender(screen).register(GuiListener::onGuiDraw);
 		});
-		ScreenEvents.AFTER_INIT.register(GuiListener::onGuiInitialize);
 		ClientTickEvents.END_CLIENT_TICK.register(GuiListener::onClientTick);
 		KeyInputCallback.EVENT.register(GuiListener::onKeyPress);
 		ItemTooltipCallback.EVENT.register(GuiListener::onTooltipAdd);
