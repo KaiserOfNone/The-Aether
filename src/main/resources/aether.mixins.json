@@ -52,6 +52,7 @@
     "client.PanoramaRendererMixin",
     "client.PauseScreenMixin",
     "client.SmithingScreenMixin",
+    "client.SoundEngineMixin",
     "client.TippableArrowRendererMixin",
     "client.TitleScreenMixin",
     "client.WorldListEntryMixin",
