@@ -1,4 +1,10 @@
-# The Aether - NeoForge - 1.21.4-1.5.5
+# The Aether - NeoForge - 1.21.1-1.5.6
+
+Fixes
+
+- Fix client config option `"Disables the Aether's Moa Skins button from appearing in GUIs"` not working properly.
+
+# The Aether - NeoForge - 1.21.1-1.5.5
 
 Changes
 
@@ -16,7 +22,7 @@ Fixes
 
 Additions
 
-- Added a new client config option `"Disables the Aether's Moa Skins button from appearing in GUIs"` for disabling the Moa Skins button; this config will only apply for players who do not have any skins.
+- Added a new client config option `"Disables the Aether's Moa Skins button from appearing in GUIs"`![img.png](img.png) for disabling the Moa Skins button; this config will only apply for players who do not have any skins.
 - Added a message when damaging the Sun Spirit with an Ice Crystal to indicate it can be damaged by conventional means as well.
 - Update es_es translation.
 - Update fr_fr translation.
