@@ -1,3 +1,14 @@
+# The Aether - NeoForge - 1.21.1-1.5.7
+
+Additions
+
+- Added a new tag `ore_bearing_ground/holystone` for holystone.
+- Added a new tag `holystone_ore_replaceables` for holystone.
+
+Fixes
+
+- Crashes relating to Cumulus and Accessories.
+
 # The Aether - NeoForge - 1.21.1-1.5.6
 
 Fixes
