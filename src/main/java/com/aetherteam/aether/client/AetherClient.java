@@ -43,8 +43,6 @@ import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import java.util.HashMap;
 
 public class AetherClient implements ClientModInitializer {
-    private static boolean refreshPacks = false;
-
     @Override
     public void onInitializeClient() {
         AetherClient.clientSetup();
@@ -68,7 +66,6 @@ public class AetherClient implements ClientModInitializer {
         registerItemModelProperties();
         registerTooltipOverrides();
         registerLoreOverrides();
-        autoApplyPacks();
 
         //--
 
@@ -121,20 +118,6 @@ public class AetherClient implements ClientModInitializer {
         LoreBookMenu.addLoreEntryOverride(registryAccess -> stack -> ItemStack.isSameItemSameComponents(stack, AetherItems.createSwetBannerItemStack(registryAccess.registryOrThrow(Registries.BANNER_PATTERN).asLookup())), "lore.item.aether.swet_banner");
     }
 
-    /**
-     * Auto applies resource packs on load.
-     */
-    public static void autoApplyPacks() {
-        if (FabricLoader.getInstance().isModLoaded("tipsmod")) {
-            if (AetherConfig.CLIENT.enable_trivia.get()) {
-                Minecraft.getInstance().getResourcePackRepository().addPack("builtin/aether_tips");
-            } else {
-                Minecraft.getInstance().getResourcePackRepository().removePack("builtin/aether_tips");
-            }
-            refreshPacks = true;
-        }
-    }
-
     public static void eventSetup() {
         AccessoryAbilityClientListener.listen();
         //AetherPlayerClientListener.listen();
@@ -167,8 +150,6 @@ public class AetherClient implements ClientModInitializer {
 
             RecipeBookCategoriesAccessor.aetherFabric$setAGGREGATE_CATEGORIES(ImmutableMap.copyOf(aggregatedCategories));
         });
-
-        ClientLifecycleEvents.CLIENT_STARTED.register(client -> AetherClient.loadComplete());
     }
 
     /**
@@ -182,16 +163,6 @@ public class AetherClient implements ClientModInitializer {
 //        event.registerIncomingEffect(AetherDimensions.AETHER_LEVEL, AetherReceivingLevelScreen::new);
 //        event.registerOutgoingEffect(AetherDimensions.AETHER_LEVEL, AetherReceivingLevelScreen::new);
 //    }
-
-    /**
-     * Refreshes resource packs at the end of loading, so that auto-applied packs in {@link AetherClient#autoApplyPacks()} get processed.
-     */
-    public static void loadComplete() {
-        if (refreshPacks) {
-            Minecraft.getInstance().reloadResourcePacks();
-            refreshPacks = false;
-        }
-    }
 
     /**
      * Used to work around a classloading crash on the server.

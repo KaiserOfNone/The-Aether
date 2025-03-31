@@ -126,6 +126,7 @@ public class Aether implements ModInitializer {
     @Override
     public void onInitialize() {
         DIRECTORY.toFile().mkdirs(); // Ensures the Aether's config folder is generated.
+        NeoForgeConfigRegistry.INSTANCE.register(Aether.MODID, ModConfig.Type.STARTUP, AetherConfig.STARTUP_SPEC);
         NeoForgeConfigRegistry.INSTANCE.register(Aether.MODID, ModConfig.Type.SERVER, AetherConfig.SERVER_SPEC);
         NeoForgeConfigRegistry.INSTANCE.register(Aether.MODID, ModConfig.Type.COMMON, AetherConfig.COMMON_SPEC);
         NeoForgeConfigRegistry.INSTANCE.register(Aether.MODID, ModConfig.Type.CLIENT, AetherConfig.CLIENT_SPEC);
@@ -372,7 +373,7 @@ public class Aether implements ModInitializer {
      * The pack is loaded and automatically applied if Tips is installed through {@link AetherClient#autoApplyPacks()}.
      */
     private void setupTipsPack(AddPackFindersEvent event) {
-        if (event.getPackType() == PackType.CLIENT_RESOURCES && FabricLoader.getInstance().isModLoaded("tipsmod")) {
+        if (event.getPackType() == PackType.CLIENT_RESOURCES && FabricLoader.getInstance().isModLoaded("tipsmod") && AetherConfig.STARTUP.enable_trivia.get()) {
             Path resourcePath = FabricLoader.getInstance().getModContainer(Aether.MODID).orElseThrow().findPath("packs/tips").orElseThrow();
             PackMetadataSection metadata = new PackMetadataSection(Component.translatable("pack.aether.tips.description"), SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES), Optional.empty());
             event.addRepositorySource((source) ->
