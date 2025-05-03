@@ -28,13 +28,6 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
     }
 
     @Override
-    public void render(SliderRenderState slider, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-        if (slider.deathTime <= 0) {
-            super.render(slider, poseStack, buffer, packedLight);
-        }
-    }
-
-    @Override
     public SliderRenderState createRenderState() {
         return new SliderRenderState();
     }
@@ -49,36 +42,43 @@ public class SliderRenderer extends MobRenderer<Slider, SliderRenderState, Slide
         reusedState.awake = entity.isAwake();
     }
 
+    @Override
+    public void render(SliderRenderState renderState, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+        if (renderState.deathTime <= 0) {
+            super.render(renderState, poseStack, buffer, packedLight);
+        }
+    }
+
     /**
      * Rotates the Slider to tilt based on the direction and angle of the damage it has received.
      *
-     * @param slider       The {@link Slider} entity.
+     * @param renderState  The {@link SliderRenderState} for the entity.
      * @param poseStack    The rendering {@link PoseStack}.
      * @param bob          The {@link Float} for the entity's animation bob.
      * @param yBodyRot     The {@link Float} for the rotation yaw.
      */
     @Override
-    protected void setupRotations(SliderRenderState slider, PoseStack poseStack, float bob, float yBodyRot) {
+    protected void setupRotations(SliderRenderState renderState, PoseStack poseStack, float bob, float yBodyRot) {
         if (!Minecraft.getInstance().isPaused()) {
-            if (slider.hurtAngle != 0) {
-                poseStack.mulPose(Axis.of(new Vector3f(slider.hurtAngleX, 0.0F, -slider.hurtAngleZ)).rotationDegrees(slider.hurtAngle * -15.0F));
+            if (renderState.hurtAngle != 0) {
+                poseStack.mulPose(Axis.of(new Vector3f(renderState.hurtAngleX, 0.0F, -renderState.hurtAngleZ)).rotationDegrees(renderState.hurtAngle * -15.0F));
             }
-            if (slider.hurtAngle > 0.0) {
-                slider.hurtAngle = (Mth.lerp(slider.partialTick, slider.hurtAngle, slider.hurtAngle * 0.78F));
+            if (renderState.hurtAngle > 0.0) {
+                renderState.hurtAngle = (Mth.lerp(renderState.partialTick, renderState.hurtAngle, renderState.hurtAngle * 0.78F));
             }
-            if (slider.isUpsideDown) {
-                poseStack.translate(0.0, slider.boundingBoxHeight + 0.1F, 0.0);
+            if (renderState.isUpsideDown) {
+                poseStack.translate(0.0, renderState.boundingBoxHeight + 0.1F, 0.0);
                 poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
             }
         }
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SliderRenderState slider) {
-        if (!slider.awake) {
-            return !slider.critical ? SLIDER_ASLEEP_TEXTURE : SLIDER_ASLEEP_CRITICAL_TEXTURE;
+    public ResourceLocation getTextureLocation(SliderRenderState renderState) {
+        if (!renderState.awake) {
+            return !renderState.critical ? SLIDER_ASLEEP_TEXTURE : SLIDER_ASLEEP_CRITICAL_TEXTURE;
         } else {
-            return !slider.critical ? SLIDER_AWAKE_TEXTURE : SLIDER_AWAKE_CRITICAL_TEXTURE;
+            return !renderState.critical ? SLIDER_AWAKE_TEXTURE : SLIDER_AWAKE_CRITICAL_TEXTURE;
         }
     }
 }

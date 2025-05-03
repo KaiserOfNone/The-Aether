@@ -27,26 +27,26 @@ public class HammerProjectileRenderer extends EntityRenderer<HammerProjectile, H
     }
 
     @Override
-    public void extractRenderState(HammerProjectile p_entity, HammerRenderState reusedState, float partialTick) {
-        super.extractRenderState(p_entity, reusedState, partialTick);
-        reusedState.jeb = p_entity.getIsJeb();
+    public void extractRenderState(HammerProjectile entity, HammerRenderState reusedState, float partialTick) {
+        super.extractRenderState(entity, reusedState, partialTick);
+        reusedState.jeb = entity.getIsJeb();
     }
 
     /**
      * [VANILLA COPY] - {@link net.minecraft.client.renderer.entity.DragonFireballRenderer}.
      */
     @Override
-    public void render(HammerRenderState hammer, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void render(HammerRenderState renderState, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
         poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
         PoseStack.Pose pose = poseStack.last();
-        VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(hammer)));
+        VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(renderState)));
         vertex(consumer, pose, packedLight, 0.0F, 0.0F, 0.0F, 1.0F);
         vertex(consumer, pose, packedLight, 1.0F, 0.0F, 1.0F, 1.0F);
         vertex(consumer, pose, packedLight, 1.0F, 1.0F, 1.0F, 0.0F);
         vertex(consumer, pose, packedLight, 0.0F, 1.0F, 0.0F, 0.0F);
         poseStack.popPose();
-        super.render(hammer, poseStack, buffer, packedLight);
+        super.render(renderState, poseStack, buffer, packedLight);
     }
 
     private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, int packedLight, float offsetX, float offsetY, float textureX, float textureY) {
@@ -61,10 +61,10 @@ public class HammerProjectileRenderer extends EntityRenderer<HammerProjectile, H
     /**
      * Checks whether the projectile should use the Kingbdogz or Jeb hammer texture.
      *
-     * @param hammer The {@link HammerRenderState} entity.
+     * @param renderState The {@link HammerRenderState} entity.
      * @return The texture {@link ResourceLocation}.
      */
-    public ResourceLocation getTextureLocation(HammerRenderState hammer) {
-        return !hammer.jeb ? KINGBDOGZ_WAVE_TEXTURE : JEB_WAVE_TEXTURE;
+    public ResourceLocation getTextureLocation(HammerRenderState renderState) {
+        return !renderState.jeb ? KINGBDOGZ_WAVE_TEXTURE : JEB_WAVE_TEXTURE;
     }
 }

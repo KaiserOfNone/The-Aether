@@ -1,13 +1,13 @@
 package com.aetherteam.aether.client.renderer.entity.model;
 
-import com.aetherteam.aether.client.renderer.entity.state.BirdRenderState;
+import com.aetherteam.aether.client.renderer.entity.state.BipedBirdRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public abstract class BipedBirdModel<T extends BirdRenderState> extends EntityModel<T> {
+public abstract class BipedBirdModel<T extends BipedBirdRenderState> extends EntityModel<T> {
     public final ModelPart head;
     public final ModelPart jaw;
     public final ModelPart neck;
@@ -53,30 +53,29 @@ public abstract class BipedBirdModel<T extends BirdRenderState> extends EntityMo
     }
 
     @Override
-    public void setupAnim(T bipedBird) {
-        this.head.xRot = bipedBird.xRot * Mth.DEG_TO_RAD;
-        this.head.yRot = bipedBird.yRot * Mth.DEG_TO_RAD;
+    public void setupAnim(T renderState) {
+        this.head.xRot = renderState.xRot * Mth.DEG_TO_RAD;
+        this.head.yRot = renderState.yRot * Mth.DEG_TO_RAD;
         this.neck.xRot = -this.head.xRot;
 
-        if (!bipedBird.isEntityOnGround) {
+        if (!renderState.isEntityOnGround) {
             this.rightWing.setPos(-3.001F, 0.0F, 4.0F);
             this.leftWing.setPos(3.001F, 0.0F, 4.0F);
             this.rightWing.xRot = -Mth.HALF_PI;
             this.leftWing.xRot = this.rightWing.xRot;
             this.rightLeg.xRot = 0.6F;
             this.leftLeg.xRot = this.rightLeg.xRot;
-            this.rightWing.yRot = bipedBird.ageInTicks;
+            this.rightWing.yRot = renderState.wingRotation;
         } else {
             this.rightWing.setPos(-3.001F, -3.0F, 3.0F);
             this.leftWing.setPos(3.001F, -3.0F, 3.0F);
             this.rightWing.xRot = 0.0F;
             this.leftWing.xRot = 0.0F;
-            this.rightLeg.xRot = Mth.cos(bipedBird.walkAnimationSpeed * 0.6662F) * 1.4F * bipedBird.walkAnimationPos;
-            this.leftLeg.xRot = Mth.cos(bipedBird.walkAnimationSpeed * 0.6662F + Mth.PI) * 1.4F * bipedBird.walkAnimationPos;
+            this.rightLeg.xRot = Mth.cos(renderState.walkAnimationSpeed * 0.6662F) * 1.4F * renderState.walkAnimationPos;
+            this.leftLeg.xRot = Mth.cos(renderState.walkAnimationSpeed * 0.6662F + Mth.PI) * 1.4F * renderState.walkAnimationPos;
             this.rightWing.yRot = 0.0F;
         }
 
         this.leftWing.yRot = -this.rightWing.yRot;
     }
-
 }

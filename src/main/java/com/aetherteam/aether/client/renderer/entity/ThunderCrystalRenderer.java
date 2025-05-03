@@ -21,7 +21,7 @@ public class ThunderCrystalRenderer extends AbstractCrystalRenderer<ThunderCryst
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CrystalRenderState crystal) {
+    public ResourceLocation getTextureLocation(CrystalRenderState renderState) {
         return THUNDER_CRYSTAL_TEXTURE;
     }
 }

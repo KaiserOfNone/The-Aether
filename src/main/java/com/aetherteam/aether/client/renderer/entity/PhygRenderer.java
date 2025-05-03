@@ -17,12 +17,14 @@ import net.minecraft.util.Mth;
 
 public class PhygRenderer extends AgeableMobRenderer<Phyg, PhygRenderState, PigModel> {
     private static final ResourceLocation PHYG_TEXTURE = ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/phyg/phyg.png");
+    private static final ResourceLocation PHYG_WINGS_TEXTURE = ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/phyg/phyg_wings.png");
+    private static final ResourceLocation PHYG_SADDLE_TEXTURE = ResourceLocation.withDefaultNamespace("textures/entity/pig/pig_saddle.png");
 
     public PhygRenderer(EntityRendererProvider.Context context) {
         super(context, new PigModel(context.bakeLayer(AetherModelLayers.PHYG)), new PigModel(context.bakeLayer(AetherModelLayers.PHYG_BABY)), 0.7F);
-        this.addLayer(new QuadrupedWingsLayer(this, new QuadrupedWingsModel<>(context.bakeLayer(AetherModelLayers.PHYG_WINGS)), ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/phyg/phyg_wings.png")));
-        this.addLayer(new SaddleLayer(this, new PigModel(context.bakeLayer(AetherModelLayers.PHYG_SADDLE)), new PigModel(context.bakeLayer(AetherModelLayers.PHYG_BABY_SADDLE)), ResourceLocation.withDefaultNamespace("textures/entity/pig/pig_saddle.png")));
-        this.addLayer(new PhygHaloLayer(this, new HaloModel(context.bakeLayer(AetherModelLayers.PHYG_HALO))));
+        this.addLayer(new QuadrupedWingsLayer<>(this, new QuadrupedWingsModel<>(context.bakeLayer(AetherModelLayers.PHYG_WINGS)), PHYG_WINGS_TEXTURE));
+        this.addLayer(new SaddleLayer<>(this, new PigModel(context.bakeLayer(AetherModelLayers.PHYG_SADDLE)), new PigModel(context.bakeLayer(AetherModelLayers.PHYG_BABY_SADDLE)), PHYG_SADDLE_TEXTURE));
+        this.addLayer(new PhygHaloLayer(this, new HaloModel<>(context.bakeLayer(AetherModelLayers.PHYG_HALO))));
     }
 
     @Override
@@ -31,15 +33,15 @@ public class PhygRenderer extends AgeableMobRenderer<Phyg, PhygRenderState, PigM
     }
 
     @Override
-    public void extractRenderState(Phyg phyg, PhygRenderState wingEntityRenderState, float p_361157_) {
-        super.extractRenderState(phyg, wingEntityRenderState, p_361157_);
-        wingEntityRenderState.wingAngle = (phyg.getWingFold() * Mth.sin(wingEntityRenderState.ageInTicks / 15.9F));
-        wingEntityRenderState.wingHold = phyg.getWingFold();
-        wingEntityRenderState.saddle = phyg.isSaddled();
+    public void extractRenderState(Phyg phyg, PhygRenderState reusedState, float partialTick) {
+        super.extractRenderState(phyg, reusedState, partialTick);
+        reusedState.wingAngle = (phyg.getWingFold() * Mth.sin(reusedState.ageInTicks / 15.9F));
+        reusedState.wingHold = phyg.getWingFold();
+        reusedState.saddle = phyg.isSaddled();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(PhygRenderState phyg) {
+    public ResourceLocation getTextureLocation(PhygRenderState renderState) {
         return PHYG_TEXTURE;
     }
 }

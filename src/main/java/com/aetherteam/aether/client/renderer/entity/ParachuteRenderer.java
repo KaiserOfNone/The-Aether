@@ -31,6 +31,11 @@ public class ParachuteRenderer extends EntityRenderer<Parachute, ParachuteRender
     }
 
     @Override
+    public ParachuteRenderState createRenderState() {
+        return new ParachuteRenderState();
+    }
+
+    @Override
     public void extractRenderState(Parachute parachute, ParachuteRenderState reusedState, float partialTick) {
         super.extractRenderState(parachute, reusedState, partialTick);
         Entity passenger = parachute.getControllingPassenger();
@@ -43,33 +48,28 @@ public class ParachuteRenderer extends EntityRenderer<Parachute, ParachuteRender
         }
     }
 
-    @Override
-    public ParachuteRenderState createRenderState() {
-        return new ParachuteRenderState();
-    }
-
     /**
      * Renders and rotates the Parachute with the player.<br><br>
      * The warning for "deprecation" is suppressed because {@link net.minecraft.client.renderer.block.BlockRenderDispatcher#renderSingleBlock(BlockState, PoseStack, MultiBufferSource, int, int, ModelData, RenderType)} is fine to use.
      *
-     * @param parachute    The {@link Parachute} entity.
+     * @param renderState    The {@link ParachuteRenderState} for the entity.
      * @param poseStack    The rendering {@link PoseStack}.
      * @param buffer       The rendering {@link MultiBufferSource}.
      * @param packedLight  The {@link Integer} for the packed lighting for rendering.
      */
     @Override
     @SuppressWarnings("deprecation")
-    public void render(ParachuteRenderState parachute, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void render(ParachuteRenderState renderState, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees(-parachute.yRot));
+        poseStack.mulPose(Axis.YP.rotationDegrees(-renderState.yRot));
 
         poseStack.translate(-0.5, 0.0, -0.5);
         Minecraft.getInstance().getBlockRenderer().renderSingleBlock(this.parachuteBlock.get().defaultBlockState(), poseStack, buffer, packedLight, OverlayTexture.NO_OVERLAY);
         poseStack.popPose();
-        super.render(parachute, poseStack, buffer, packedLight);
+        super.render(renderState, poseStack, buffer, packedLight);
     }
 
-    public ResourceLocation getTextureLocation(ParachuteRenderState parachute) {
+    public ResourceLocation getTextureLocation(ParachuteRenderState renderState) {
         return InventoryMenu.BLOCK_ATLAS;
     }
 }

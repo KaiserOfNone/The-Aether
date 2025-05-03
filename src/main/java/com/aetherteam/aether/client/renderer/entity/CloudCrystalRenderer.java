@@ -21,7 +21,7 @@ public class CloudCrystalRenderer<T extends AbstractCrystal> extends AbstractCry
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CrystalRenderState crystal) {
+    public ResourceLocation getTextureLocation(CrystalRenderState renderState) {
         return ICE_CRYSTAL_TEXTURE;
     }
 }

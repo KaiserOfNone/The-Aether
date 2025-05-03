@@ -30,18 +30,18 @@ public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRen
         reusedState.isHurt = entity.hurtTime > 0;
         reusedState.sinage = entity.getSinage();
         reusedState.sinageAdd = entity.getSinageAdd();
-        reusedState.ageInTicks = getBob(entity, partialTick);
+        reusedState.ageInTicks = this.getPetalRotation(entity, partialTick);
     }
 
     /**
      * Scales the Aechor Plant according to its size.
      *
-     * @param aechorPlant  The {@link AechorPlantRenderState} entity.
+     * @param renderState  The {@link AechorPlantRenderState} for the entity.
      * @param poseStack    The rendering {@link PoseStack}.
      */
     @Override
-    protected void scale(AechorPlantRenderState aechorPlant, PoseStack poseStack) {
-        float f2 = 0.625F + aechorPlant.scale / 6.0F;
+    protected void scale(AechorPlantRenderState renderState, PoseStack poseStack) {
+        float f2 = 0.625F + renderState.scale / 6.0F;
         poseStack.scale(f2, f2, f2);
         poseStack.translate(0.0, 1.2, 0.0);
         this.shadowRadius = f2 - 0.25F;
@@ -54,13 +54,12 @@ public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRen
      * @param partialTick The {@link Float} for the game's partial ticks.
      * @return The {@link Float} for the petal rotation.
      */
-
-    protected float getBob(AechorPlant aechorPlant, float partialTick) {
+    protected float getPetalRotation(AechorPlant aechorPlant, float partialTick) {
         return Mth.lerp(partialTick, aechorPlant.getSinage(), aechorPlant.getSinage() + aechorPlant.getSinageAdd());
     }
 
     @Override
-    public ResourceLocation getTextureLocation(AechorPlantRenderState aechorPlant) {
+    public ResourceLocation getTextureLocation(AechorPlantRenderState renderState) {
         return AECHOR_PLANT_TEXTURE;
     }
 }

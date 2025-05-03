@@ -35,12 +35,12 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
     /**
      * Scales the Aerbunny if it is a baby.
      *
-     * @param aerbunny     The {@link Aerbunny} entity.
+     * @param renderState  The {@link AerbunnyRenderState} for the entity.
      * @param poseStack    The rendering {@link PoseStack}.
      */
     @Override
-    protected void scale(AerbunnyRenderState aerbunny, PoseStack poseStack) {
-        if (aerbunny.isBaby) {
+    protected void scale(AerbunnyRenderState renderState, PoseStack poseStack) {
+        if (renderState.isBaby) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         }
         poseStack.translate(0.0, 0.2, 0.0);
@@ -49,27 +49,27 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
     /**
      * Rotates the Aerbunny back and forth when it is jumping.
      *
-     * @param aerbunny     The {@link Aerbunny} entity.
+     * @param renderState  The {@link AerbunnyRenderState} for the entity.
      * @param poseStack    The rendering {@link PoseStack}.
      * @param yBodyRot     The {@link Float} for the rotation yaw.
      * @param scale        The {@link Float} for the render scale.
      */
     @Override
-    protected void setupRotations(AerbunnyRenderState aerbunny, PoseStack poseStack, float yBodyRot, float scale) {
-        super.setupRotations(aerbunny, poseStack, yBodyRot, scale);
-        if (!aerbunny.onGround) {
-            if (aerbunny.deltaMovement.y() > 0.5) {
-                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(aerbunny.partialTick, 0.0F, 15.0F)));
-            } else if (aerbunny.deltaMovement.y() < -0.5) {
-                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(aerbunny.partialTick, 0.0F, -15.0F)));
+    protected void setupRotations(AerbunnyRenderState renderState, PoseStack poseStack, float yBodyRot, float scale) {
+        super.setupRotations(renderState, poseStack, yBodyRot, scale);
+        if (!renderState.onGround) {
+            if (renderState.deltaMovement.y() > 0.5) {
+                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(renderState.partialTick, 0.0F, 15.0F)));
+            } else if (renderState.deltaMovement.y() < -0.5) {
+                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(renderState.partialTick, 0.0F, -15.0F)));
             } else {
-                poseStack.mulPose(Axis.XN.rotationDegrees((float) (aerbunny.deltaMovement.y() * 30.0)));
+                poseStack.mulPose(Axis.XN.rotationDegrees((float) (renderState.deltaMovement.y() * 30.0)));
             }
         }
     }
 
     @Override
-    public ResourceLocation getTextureLocation(AerbunnyRenderState aerbunny) {
+    public ResourceLocation getTextureLocation(AerbunnyRenderState renderState) {
         return AERBUNNY_TEXTURE;
     }
 }

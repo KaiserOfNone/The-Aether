@@ -23,5 +23,4 @@ public class ClassicZephyrModel extends EntityModel<ZephyrRenderState> {
         partDefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-10.0F, 0.0F, -10.0F, 20.0F, 14.0F, 24.0F), PartPose.ZERO);
         return LayerDefinition.create(meshDefinition, 128, 64);
     }
-
 }

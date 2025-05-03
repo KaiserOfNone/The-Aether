@@ -30,8 +30,8 @@ public class SheepuffWoolLayer extends RenderLayer<SheepuffRenderState, Sheepuff
     private final EntityModel<SheepuffRenderState> adultPuffModel;
     private final EntityModel<SheepuffRenderState> babyPuffModel;
 
-    public SheepuffWoolLayer(RenderLayerParent<SheepuffRenderState, SheepuffModel> renderer, EntityModelSet modelSet) {
-        super(renderer);
+    public SheepuffWoolLayer(RenderLayerParent<SheepuffRenderState, SheepuffModel> entityRenderer, EntityModelSet modelSet) {
+        super(entityRenderer);
         this.adultModel = new SheepuffWoolModel(modelSet.bakeLayer(AetherModelLayers.SHEEPUFF_WOOL));
         this.babyModel = new SheepuffWoolModel(modelSet.bakeLayer(AetherModelLayers.SHEEPUFF_BABY_WOOL));
         this.adultPuffModel = new SheepuffWoolModel(modelSet.bakeLayer(AetherModelLayers.SHEEPUFF_WOOL));
@@ -55,11 +55,11 @@ public class SheepuffWoolLayer extends RenderLayer<SheepuffRenderState, Sheepuff
                 if (renderState.customName != null && "jeb_".equals(renderState.customName.getString())) {
                     int j = 25;
                     int k = Mth.floor(renderState.ageInTicks);
-                    int l = k / 25 + renderState.id;
+                    int l = k / j + renderState.id;
                     int i1 = DyeColor.values().length;
                     int j1 = l % i1;
                     int k1 = (l + 1) % i1;
-                    float f = ((float) (k % 25) + Mth.frac(renderState.ageInTicks)) / 25.0F;
+                    float f = ((float) (k % j) + Mth.frac(renderState.ageInTicks)) / j;
                     int l1 = Sheep.getColor(DyeColor.byId(j1));
                     int i2 = Sheep.getColor(DyeColor.byId(k1));
                     i = ARGB.lerp(f, l1, i2);

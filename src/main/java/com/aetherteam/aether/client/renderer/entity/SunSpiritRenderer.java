@@ -20,18 +20,6 @@ public class SunSpiritRenderer extends MobRenderer<SunSpirit, SunSpiritRenderSta
     }
 
     @Override
-    protected void scale(SunSpiritRenderState pLivingEntity, PoseStack pMatrixStack) {
-        pMatrixStack.scale(2.25F, 2.25F, 2.25F);
-        pMatrixStack.translate(0, 0.85, 0);
-    }
-
-
-    @Override
-    protected int getBlockLightLevel(SunSpirit entity, BlockPos pos) {
-        return 15;
-    }
-
-    @Override
     public SunSpiritRenderState createRenderState() {
         return new SunSpiritRenderState();
     }
@@ -43,12 +31,23 @@ public class SunSpiritRenderer extends MobRenderer<SunSpirit, SunSpiritRenderSta
     }
 
     @Override
+    protected void scale(SunSpiritRenderState renderState, PoseStack poseStack) {
+        poseStack.scale(2.25F, 2.25F, 2.25F);
+        poseStack.translate(0, 0.85, 0);
+    }
+
+    @Override
+    protected int getBlockLightLevel(SunSpirit entity, BlockPos pos) {
+        return 15;
+    }
+
+    @Override
     protected int getSkyLightLevel(SunSpirit sunSpirit, BlockPos pos) {
         return 15;
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SunSpiritRenderState sunSpirit) {
-        return sunSpirit.isFrozen ? FROZEN_SPIRIT_TEXTURE : SUN_SPIRIT_TEXTURE;
+    public ResourceLocation getTextureLocation(SunSpiritRenderState renderState) {
+        return renderState.isFrozen ? FROZEN_SPIRIT_TEXTURE : SUN_SPIRIT_TEXTURE;
     }
 }

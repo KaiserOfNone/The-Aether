@@ -59,17 +59,16 @@ public class AerbunnyModel extends EntityModel<AerbunnyRenderState> {
         return LayerDefinition.create(meshDefinition, 64, 32);
     }
 
-
     @Override
-    public void setupAnim(AerbunnyRenderState aerbunny) {
-        super.setupAnim(aerbunny);
-        this.head.xRot = aerbunny.xRot * Mth.DEG_TO_RAD;
-        this.head.yRot = aerbunny.yRot * Mth.DEG_TO_RAD;
-        this.rightFrontLeg.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F) * 1.0F * aerbunny.walkAnimationSpeed) - this.body.xRot;
-        this.leftFrontLeg.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F) * 1.0F * aerbunny.walkAnimationSpeed) - this.body.xRot;
-        this.rightBackLeg.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F + Mth.PI) * 1.2F * aerbunny.walkAnimationSpeed) - this.body.xRot;
-        this.leftBackLeg.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F + Mth.PI) * 1.2F * aerbunny.walkAnimationSpeed) - this.body.xRot;
-        float a = 1.0F + aerbunny.puffiness * 0.5F;
+    public void setupAnim(AerbunnyRenderState renderState) {
+        super.setupAnim(renderState);
+        this.head.xRot = renderState.xRot * Mth.DEG_TO_RAD;
+        this.head.yRot = renderState.yRot * Mth.DEG_TO_RAD;
+        this.rightFrontLeg.xRot = (Mth.cos(renderState.walkAnimationPos * 0.6662F) * 1.0F * renderState.walkAnimationSpeed) - this.body.xRot;
+        this.leftFrontLeg.xRot = (Mth.cos(renderState.walkAnimationPos * 0.6662F) * 1.0F * renderState.walkAnimationSpeed) - this.body.xRot;
+        this.rightBackLeg.xRot = (Mth.cos(renderState.walkAnimationPos * 0.6662F + Mth.PI) * 1.2F * renderState.walkAnimationSpeed) - this.body.xRot;
+        this.leftBackLeg.xRot = (Mth.cos(renderState.walkAnimationPos * 0.6662F + Mth.PI) * 1.2F * renderState.walkAnimationSpeed) - this.body.xRot;
+        float a = 1.0F + renderState.puffiness * 0.5F;
         this.puff.offsetScale(new Vector3f(a, a, a));
     }
 }

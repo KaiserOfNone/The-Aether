@@ -24,19 +24,18 @@ public class SheepuffRenderer extends AgeableMobRenderer<Sheepuff, SheepuffRende
     }
 
     @Override
-    public void extractRenderState(Sheepuff sheepuff, SheepuffRenderState renderState, float p_361157_) {
-        super.extractRenderState(sheepuff, renderState, p_361157_);
-        renderState.headEatAngleScale = sheepuff.getHeadEatAngleScale(p_361157_);
-        renderState.headEatPositionScale = sheepuff.getHeadEatPositionScale(p_361157_);
-        renderState.isSheared = sheepuff.isSheared();
-        renderState.woolColor = sheepuff.getColor();
-        renderState.id = sheepuff.getId();
-        renderState.puff = sheepuff.getPuffed();
+    public void extractRenderState(Sheepuff sheepuff, SheepuffRenderState reusedState, float partialTick) {
+        super.extractRenderState(sheepuff, reusedState, partialTick);
+        reusedState.headEatAngleScale = sheepuff.getHeadEatAngleScale(partialTick);
+        reusedState.headEatPositionScale = sheepuff.getHeadEatPositionScale(partialTick);
+        reusedState.isSheared = sheepuff.isSheared();
+        reusedState.woolColor = sheepuff.getColor();
+        reusedState.id = sheepuff.getId();
+        reusedState.puff = sheepuff.getPuffed();
     }
 
-
     @Override
-    public ResourceLocation getTextureLocation(SheepuffRenderState sheepuff) {
+    public ResourceLocation getTextureLocation(SheepuffRenderState renderState) {
         return SHEEPUFF_TEXTURE;
     }
 }

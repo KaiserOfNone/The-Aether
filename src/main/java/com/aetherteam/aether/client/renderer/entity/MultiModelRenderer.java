@@ -19,9 +19,9 @@ public abstract class MultiModelRenderer<T extends Mob, R extends LivingEntityRe
     }
 
     @Override
-    public void render(R entity, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void render(R renderState, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         this.model = this.getModel();
-        super.render(entity, poseStack, buffer, packedLight);
+        super.render(renderState, poseStack, buffer, packedLight);
     }
 
     @Override
@@ -34,7 +34,7 @@ public abstract class MultiModelRenderer<T extends Mob, R extends LivingEntityRe
     public abstract O getOldModel();
 
     @Override
-    public ResourceLocation getTextureLocation(R entity) {
+    public ResourceLocation getTextureLocation(R renderState) {
         return AetherConfig.CLIENT.legacy_models.get() ? this.getOldTexture() : this.getDefaultTexture();
     }
 

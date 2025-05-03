@@ -15,11 +15,13 @@ import net.minecraft.util.Mth;
 
 public class FlyingCowRenderer extends AgeableMobRenderer<FlyingCow, FlyingCowRenderState, CowModel> {
     private static final ResourceLocation FLYING_COW_TEXTURE = ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/flying_cow/flying_cow.png");
+    private static final ResourceLocation FLYING_COW_WINGS_TEXTURE = ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/flying_cow/flying_cow_wings.png");
+    private static final ResourceLocation FLYING_COW_SADDLE_TEXTURE = ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/flying_cow/flying_cow_saddle.png");
 
     public FlyingCowRenderer(EntityRendererProvider.Context context) {
         super(context, new CowModel(context.bakeLayer(AetherModelLayers.FLYING_COW)), new CowModel(context.bakeLayer(AetherModelLayers.FLYING_COW_BABY)), 0.7F);
-        this.addLayer(new QuadrupedWingsLayer(this, new QuadrupedWingsModel<>(context.bakeLayer(AetherModelLayers.FLYING_COW_WINGS)), ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/flying_cow/flying_cow_wings.png")));
-        this.addLayer(new SaddleLayer(this, new CowModel(context.bakeLayer(AetherModelLayers.FLYING_COW_SADDLE)), new CowModel(context.bakeLayer(AetherModelLayers.FLYING_COW_BABY_SADDLE)), ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/flying_cow/flying_cow_saddle.png")));
+        this.addLayer(new QuadrupedWingsLayer<>(this, new QuadrupedWingsModel<>(context.bakeLayer(AetherModelLayers.FLYING_COW_WINGS)), FLYING_COW_WINGS_TEXTURE));
+        this.addLayer(new SaddleLayer<>(this, new CowModel(context.bakeLayer(AetherModelLayers.FLYING_COW_SADDLE)), new CowModel(context.bakeLayer(AetherModelLayers.FLYING_COW_BABY_SADDLE)), FLYING_COW_SADDLE_TEXTURE));
     }
 
     @Override
@@ -28,15 +30,15 @@ public class FlyingCowRenderer extends AgeableMobRenderer<FlyingCow, FlyingCowRe
     }
 
     @Override
-    public void extractRenderState(FlyingCow phyg, FlyingCowRenderState wingEntityRenderState, float p_361157_) {
-        super.extractRenderState(phyg, wingEntityRenderState, p_361157_);
-        wingEntityRenderState.wingAngle = (phyg.getWingFold() * Mth.sin(wingEntityRenderState.ageInTicks / 15.9F));
-        wingEntityRenderState.wingHold = phyg.getWingFold();
-        wingEntityRenderState.saddle = phyg.isSaddled();
+    public void extractRenderState(FlyingCow entity, FlyingCowRenderState reusedState, float partialTick) {
+        super.extractRenderState(entity, reusedState, partialTick);
+        reusedState.wingAngle = (entity.getWingFold() * Mth.sin(reusedState.ageInTicks / 15.9F));
+        reusedState.wingHold = entity.getWingFold();
+        reusedState.saddle = entity.isSaddled();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(FlyingCowRenderState flyingCow) {
+    public ResourceLocation getTextureLocation(FlyingCowRenderState renderState) {
         return FLYING_COW_TEXTURE;
     }
 }

@@ -34,16 +34,16 @@ public class MoaHatEmissiveLayer extends RenderLayer<MoaRenderState, MoaModel> {
      * @param poseStack       The rendering {@link PoseStack}.
      * @param buffer          The rendering {@link MultiBufferSource}.
      * @param packedLight     The {@link Integer} for the packed lighting for rendering.
-     * @param moa             The {@link Moa} entity.
+     * @param renderState     The {@link MoaRenderState} for the entity.
      * @param netHeadYaw      The {@link Float} for the head yaw rotation.
      * @param headPitch       The {@link Float} for the head pitch rotation.
      */
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, MoaRenderState moa, float netHeadYaw, float headPitch) {
-        ResourceLocation texture = this.getMoaSkinLocation(moa);
-        if (texture != null && !moa.isInvisible) {
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, MoaRenderState renderState, float netHeadYaw, float headPitch) {
+        ResourceLocation texture = this.getMoaSkinLocation(renderState);
+        if (texture != null && !renderState.isInvisible) {
             RenderType renderType = RenderType.eyes(texture);
-            this.hat.setupAnim(moa);
+            this.hat.setupAnim(renderState);
             VertexConsumer consumer = buffer.getBuffer(renderType);
             this.hat.renderToBuffer(poseStack, consumer, 15728640, OverlayTexture.NO_OVERLAY);
         }
@@ -52,13 +52,13 @@ public class MoaHatEmissiveLayer extends RenderLayer<MoaRenderState, MoaModel> {
     /**
      * Retrieves the hat emissive texture for the player's {@link com.aetherteam.aether.perk.types.MoaSkins.MoaSkin}, if there is one and the player has a Moa Skin.
      *
-     * @param moa The {@link Moa} to retrieve the skin from.
+     * @param renderState The {@link MoaRenderState} to retrieve the skin from.
      * @return The {@link ResourceLocation} for the hat texture.
      */
     @Nullable
-    private ResourceLocation getMoaSkinLocation(MoaRenderState moa) {
-        UUID lastRiderUUID = moa.lastRider;
-        UUID moaUUID = moa.moaUUID;
+    private ResourceLocation getMoaSkinLocation(MoaRenderState renderState) {
+        UUID lastRiderUUID = renderState.lastRider;
+        UUID moaUUID = renderState.moaUUID;
         Map<UUID, MoaData> userSkinsData = ClientMoaSkinPerkData.INSTANCE.getClientPerkData();
         if (Minecraft.getInstance().screen instanceof MoaSkinsScreen moaSkinsScreen && moaSkinsScreen.getSelectedSkin() != null && moaSkinsScreen.getPreviewMoa() != null && moaSkinsScreen.getPreviewMoa().getMoaUUID() != null && moaSkinsScreen.getPreviewMoa().getMoaUUID().equals(moaUUID)) {
             return moaSkinsScreen.getSelectedSkin().getHatEmissiveLocation();

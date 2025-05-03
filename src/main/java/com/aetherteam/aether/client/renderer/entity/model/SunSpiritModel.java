@@ -35,16 +35,15 @@ public class SunSpiritModel<T extends LivingEntityRenderState> extends EntityMod
     }
 
     @Override
-    public void setupAnim(T entity) {
-        this.head.xRot = entity.xRot * 0.017453292F;
-        this.head.yRot = entity.yRot * 0.017453292F;
+    public void setupAnim(T renderState) {
+        this.head.xRot = renderState.xRot * 0.017453292F;
+        this.head.yRot = renderState.yRot * 0.017453292F;
 
-        this.rightArm.xRot = -(Mth.sin(entity.ageInTicks * 0.067F) * 0.05F);
+        this.rightArm.xRot = -(Mth.sin(renderState.ageInTicks * 0.067F) * 0.05F);
         this.rightArm.yRot = 0.0F;
-        this.rightArm.zRot = -(Mth.cos(entity.ageInTicks * 0.09F) * 0.05F - 0.05F);
+        this.rightArm.zRot = -(Mth.cos(renderState.ageInTicks * 0.09F) * 0.05F - 0.05F);
         this.leftArm.xRot = -(this.rightArm.xRot);
         this.leftArm.yRot = this.rightArm.yRot;
         this.leftArm.zRot = -(this.rightArm.zRot);
     }
-
 }

@@ -26,18 +26,17 @@ public class SwetOuterLayer extends RenderLayer<SwetRenderState, SlimeModel> {
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, SwetRenderState swet, float v, float v1) {
-        Minecraft minecraft = Minecraft.getInstance();
-        boolean flag = swet.appearsGlowing && swet.isInvisible;
-        if (!swet.isInvisible || flag) {
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, SwetRenderState renderState, float v, float v1) {
+        boolean flag = renderState.appearsGlowing && renderState.isInvisible;
+        if (!renderState.isInvisible || flag) {
             VertexConsumer consumer;
             if (flag) {
                 consumer = buffer.getBuffer(RenderType.outline(texture));
             } else {
                 consumer = buffer.getBuffer(RenderType.entityTranslucent(texture));
             }
-            this.outer.setupAnim(swet);
-            this.outer.renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(swet, 0.0F));
+            this.outer.setupAnim(renderState);
+            this.outer.renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F));
         }
     }
 }

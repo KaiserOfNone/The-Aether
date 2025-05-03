@@ -15,7 +15,6 @@ public abstract class SwetRenderer extends MobRenderer<Swet, SwetRenderState, Sl
         super(context, new SlimeModel(context.bakeLayer(AetherModelLayers.SWET)), 0.3F);
     }
 
-
     @Override
     public void extractRenderState(Swet entity, SwetRenderState reusedState, float partialTick) {
         super.extractRenderState(entity, reusedState, partialTick);
@@ -34,20 +33,19 @@ public abstract class SwetRenderer extends MobRenderer<Swet, SwetRenderState, Sl
     /**
      * Scales the Swet according to its size.
      *
-     * @param swet         The {@link AechorPlant} entity.
+     * @param renderState  The {@link SwetRenderState} for the entity.
      * @param poseStack    The rendering {@link PoseStack}.
      */
     @Override
-    protected void scale(SwetRenderState swet, PoseStack poseStack) {
+    protected void scale(SwetRenderState renderState, PoseStack poseStack) {
         float scale = 1.5F;
-        scale += swet.extraWidth;
+        scale += renderState.extraWidth;
 
-
-        float height = swet.swetHeight;
-        float width = swet.swetWidth;
+        float height = renderState.swetHeight;
+        float width = renderState.swetWidth;
 
         poseStack.scale(width * scale, height * scale, width * scale);
-        poseStack.scale(swet.scale, swet.scale, swet.scale);
+        poseStack.scale(renderState.scale, renderState.scale, renderState.scale);
         this.shadowRadius = 0.3F * width;
     }
 }

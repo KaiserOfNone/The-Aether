@@ -20,7 +20,7 @@ public class GoldenDartRenderer extends ArrowRenderer<GoldenDart, ArrowRenderSta
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ArrowRenderState dart) {
+    public ResourceLocation getTextureLocation(ArrowRenderState renderState) {
         return GOLDEN_DART_TEXTURE;
     }
 }

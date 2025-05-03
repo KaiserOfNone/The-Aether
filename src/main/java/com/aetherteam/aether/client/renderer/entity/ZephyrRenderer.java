@@ -36,18 +36,18 @@ public class ZephyrRenderer extends MultiModelRenderer<Zephyr, ZephyrRenderState
     public void extractRenderState(Zephyr entity, ZephyrRenderState reusedState, float partialTick) {
         super.extractRenderState(entity, reusedState, partialTick);
         reusedState.cloudScale = Mth.lerp(partialTick, entity.getCloudScale(), entity.getCloudScale() + entity.getCloudScaleAdd());
-        reusedState.ageInTicks = getBob(entity, partialTick);
+        reusedState.ageInTicks = this.getTailRotation(entity, partialTick);
     }
 
     /**
      * Scales the Zephyr according to its attack charge progress, as well as dependent on the model it is using.
      *
-     * @param zephyr       The {@link Zephyr} entity.
+     * @param renderState       The {@link Zephyr} entity.
      * @param poseStack    The rendering {@link PoseStack}.
      */
     @Override
-    protected void scale(ZephyrRenderState zephyr, PoseStack poseStack) {
-        float f = Math.min(zephyr.cloudScale, 38.0F);
+    protected void scale(ZephyrRenderState renderState, PoseStack poseStack) {
+        float f = Math.min(renderState.cloudScale, 38.0F);
         float f1 = f / 38.0F;
         if (f1 < 0.0F) {
             f1 = 0.0F;
@@ -72,7 +72,7 @@ public class ZephyrRenderer extends MultiModelRenderer<Zephyr, ZephyrRenderState
      * @param partialTicks The {@link Float} for the game's partial ticks.
      * @return The {@link Float} for the petal rotation.
      */
-    protected float getBob(Zephyr zephyr, float partialTicks) {
+    protected float getTailRotation(Zephyr zephyr, float partialTicks) {
         return Mth.lerp(partialTicks, zephyr.getTailRot(), zephyr.getTailRot() + zephyr.getTailRotAdd());
     }
 

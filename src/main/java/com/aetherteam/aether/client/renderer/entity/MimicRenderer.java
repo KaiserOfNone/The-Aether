@@ -20,8 +20,8 @@ public class MimicRenderer extends MobRenderer<Mimic, LivingEntityRenderState, M
 
     private boolean isChristmas;
 
-    public MimicRenderer(EntityRendererProvider.Context renderer) {
-        super(renderer, new MimicModel(renderer.bakeLayer(AetherModelLayers.MIMIC)), 1.0F);
+    public MimicRenderer(EntityRendererProvider.Context context) {
+        super(context, new MimicModel(context.bakeLayer(AetherModelLayers.MIMIC)), 1.0F);
         Calendar calendar = Calendar.getInstance();
         if (calendar.get(Calendar.MONTH) == Calendar.DECEMBER && calendar.get(Calendar.DAY_OF_MONTH) >= 24 && calendar.get(Calendar.DAY_OF_MONTH) <= 26) { // Time period when chests display as presents in Vanilla.
             this.isChristmas = true;
@@ -41,7 +41,7 @@ public class MimicRenderer extends MobRenderer<Mimic, LivingEntityRenderState, M
      */
     @Override
     public ResourceLocation getTextureLocation(LivingEntityRenderState Mimic) {
-        if (ModList.get().isLoaded("lootr")) {
+        if (ModList.get().isLoaded("lootr")) { // TODO
             if (!ConfigManager.isVanillaTextures()) {
                 if (ConfigManager.isNewTextures()) {
                     return LOOTR_TEXTURE;

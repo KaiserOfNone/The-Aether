@@ -2,17 +2,21 @@ package com.aetherteam.aether.client.renderer.entity.model;
 
 import com.aetherteam.aether.client.renderer.entity.state.SheepuffRenderState;
 import com.aetherteam.aether.entity.passive.Sheepuff;
+import net.minecraft.client.model.BabyModelTransform;
 import net.minecraft.client.model.QuadrupedModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class SheepuffModel extends QuadrupedModel<SheepuffRenderState> {
-    public float headXRot;
+import java.util.Set;
 
+/**
+ * [CODE COPY] - {@link net.minecraft.client.model.SheepModel}
+ */
+public class SheepuffModel extends QuadrupedModel<SheepuffRenderState> {
     public SheepuffModel(ModelPart root) {
-        super(root, false, 8.0F, 4.0F, 2.0F, 2.0F, 24);
+        super(root);
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -23,15 +27,10 @@ public class SheepuffModel extends QuadrupedModel<SheepuffRenderState> {
         return LayerDefinition.create(meshDefinition, 64, 32);
     }
 
-    public void prepareMobModel(Sheepuff sheepuff, float limbSwing, float limbSwingAmount, float partialTicks) {
-        super.prepareMobModel(sheepuff, limbSwing, limbSwingAmount, partialTicks);
-        this.head.y = 6.0F + sheepuff.getHeadEatPositionScale(partialTicks) * 9.0F;
-        this.headXRot = sheepuff.getHeadEatAngleScale(partialTicks);
-    }
-
     @Override
-    public void setupAnim(Sheepuff sheepuff, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setupAnim(sheepuff, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        this.head.xRot = this.headXRot;
+    public void setupAnim(SheepuffRenderState renderState) {
+        super.setupAnim(renderState);
+        this.head.y += renderState.headEatPositionScale * 9.0F * renderState.ageScale;
+        this.head.xRot = renderState.headEatAngleScale;
     }
 }

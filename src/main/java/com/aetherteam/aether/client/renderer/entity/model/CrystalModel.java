@@ -32,10 +32,10 @@ public class CrystalModel<T extends CrystalRenderState> extends EntityModel<T> {
     }
 
     @Override
-    public void setupAnim(T crystal) {
+    public void setupAnim(T renderState) {
         for (ModelPart modelPart : this.root.getAllParts().toList()) {
-            modelPart.xRot = crystal.xRot * Mth.DEG_TO_RAD;
-            modelPart.yRot = crystal.yRot * Mth.DEG_TO_RAD;
+            modelPart.xRot = renderState.xRot * Mth.DEG_TO_RAD;
+            modelPart.yRot = renderState.yRot * Mth.DEG_TO_RAD;
         }
     }
 }

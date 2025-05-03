@@ -23,16 +23,16 @@ public abstract class AbstractCrystalRenderer<T extends AbstractCrystal, R exten
     }
 
     @Override
-    public void extractRenderState(T p_entity, R reusedState, float partialTick) {
-        super.extractRenderState(p_entity, reusedState, partialTick);
-        reusedState.xRot = p_entity.getXRot(partialTick);
-        reusedState.yRot = p_entity.getYRot(partialTick);
+    public void extractRenderState(T entity, R reusedState, float partialTick) {
+        super.extractRenderState(entity, reusedState, partialTick);
+        reusedState.xRot = entity.getXRot(partialTick);
+        reusedState.yRot = entity.getYRot(partialTick);
     }
 
     /**
      * Rotates the different parts of the crystal model.
      *
-     * @param renderState      The {@link EntityRenderState}.
+     * @param renderState  The {@link EntityRenderState}.
      * @param poseStack    The rendering {@link PoseStack}.
      * @param buffer       The rendering {@link MultiBufferSource}.
      * @param packedLight  The {@link Integer} for the packed lighting for rendering.
@@ -41,17 +41,17 @@ public abstract class AbstractCrystalRenderer<T extends AbstractCrystal, R exten
     public void render(R renderState, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
         poseStack.translate(0.0, 0.4, 0.0);
-        VertexConsumer iVertexBuilder = buffer.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(renderState)));
+        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(renderState)));
         float f = renderState.ageInTicks + renderState.partialTick;
         poseStack.mulPose(Axis.XP.rotationDegrees(f * 0.1F * 360.0F));
-        this.crystal.crystal1.render(poseStack, iVertexBuilder, packedLight, OverlayTexture.NO_OVERLAY);
+        this.crystal.crystal1.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         poseStack.mulPose(Axis.YP.rotationDegrees(f * 0.1F * 360.0F));
-        this.crystal.crystal2.render(poseStack, iVertexBuilder, packedLight, OverlayTexture.NO_OVERLAY);
+        this.crystal.crystal2.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         poseStack.mulPose(Axis.ZP.rotationDegrees(f * 0.1F * 360.0F));
-        this.crystal.crystal3.render(poseStack, iVertexBuilder, packedLight, OverlayTexture.NO_OVERLAY);
+        this.crystal.crystal3.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
         poseStack.popPose();
         super.render(renderState, poseStack, buffer, packedLight);
     }
 
-    protected abstract ResourceLocation getTextureLocation(R crystal);
+    protected abstract ResourceLocation getTextureLocation(R renderState);
 }

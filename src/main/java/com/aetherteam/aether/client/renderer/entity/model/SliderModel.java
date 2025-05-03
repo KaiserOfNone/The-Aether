@@ -22,6 +22,7 @@ public class SliderModel extends EntityModel<SliderRenderState> {
     }
 
     @Override
-    public void setupAnim(SliderRenderState slider, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(SliderRenderState renderState) {
+
     }
 }

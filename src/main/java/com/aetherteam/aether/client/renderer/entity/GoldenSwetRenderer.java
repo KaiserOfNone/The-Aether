@@ -17,7 +17,7 @@ public class GoldenSwetRenderer extends SwetRenderer {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SwetRenderState swet) {
+    public ResourceLocation getTextureLocation(SwetRenderState renderState) {
         return GOLDEN_TEXTURE;
     }
 }

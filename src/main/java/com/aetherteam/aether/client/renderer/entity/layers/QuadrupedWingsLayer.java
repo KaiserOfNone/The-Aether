@@ -10,9 +10,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
-public class QuadrupedWingsLayer<T extends WingEntityRenderState, M extends QuadrupedModel<T>> extends RenderLayer<T, M> {
+public class QuadrupedWingsLayer<T extends WingEntityRenderState, M extends QuadrupedModel<LivingEntityRenderState>> extends RenderLayer<T, M> {
     private final ResourceLocation resourceLocation;
     private final QuadrupedWingsModel<T> wings;
 
@@ -28,20 +29,20 @@ public class QuadrupedWingsLayer<T extends WingEntityRenderState, M extends Quad
      * @param poseStack       The rendering {@link PoseStack}.
      * @param buffer          The rendering {@link MultiBufferSource}.
      * @param packedLight     The {@link Integer} for the packed lighting for rendering.
-     * @param entity          The entity.
+     * @param renderState     The render state for the entity.
      * @param netHeadYaw      The {@link Float} for the head yaw rotation.
      * @param headPitch       The {@link Float} for the head pitch rotation.
      */
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T entity, float netHeadYaw, float headPitch) {
-        if (!entity.isInvisible) {
-            if (entity.isBaby) {
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T renderState, float netHeadYaw, float headPitch) {
+        if (!renderState.isInvisible) {
+            if (renderState.isBaby) {
                 poseStack.scale(0.5F, 0.5F, 0.5F);
                 poseStack.translate(0.0F, 1.5F, 0.0F);
             }
-            this.wings.setupAnim(entity);
+            this.wings.setupAnim(renderState);
             VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutoutNoCull(this.resourceLocation));
-            this.wings.renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(entity, 0.0F));
+            this.wings.renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F));
         }
     }
 }

@@ -29,16 +29,16 @@ public class ZephyrTransparencyLayer extends RenderLayer<ZephyrRenderState, Enti
      * @param poseStack       The rendering {@link PoseStack}.
      * @param buffer          The rendering {@link MultiBufferSource}.
      * @param packedLight     The {@link Integer} for the packed lighting for rendering.
-     * @param zephyr          The {@link Zephyr} entity.
+     * @param renderState     The {@link ZephyrRenderState} for the entity.
      * @param netHeadYaw      The {@link Float} for the head yaw rotation.
      * @param headPitch       The {@link Float} for the head pitch rotation.
      */
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, ZephyrRenderState zephyr, float netHeadYaw, float headPitch) {
-        if (this.getParentModel() instanceof ZephyrModel && !zephyr.isInvisible) {
-            this.transparency.setupAnim(zephyr);
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, ZephyrRenderState renderState, float netHeadYaw, float headPitch) {
+        if (this.getParentModel() instanceof ZephyrModel && !renderState.isInvisible) {
+            this.transparency.setupAnim(renderState);
             VertexConsumer consumer = buffer.getBuffer(RenderType.entityTranslucent(ZEPHYR_TRANSPARENCY_TEXTURE));
-            this.transparency.renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(zephyr, 0.0F));
+            this.transparency.renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(renderState, 0.0F));
         }
     }
 }

@@ -45,5 +45,4 @@ public class QuadrupedWingsModel<T extends WingEntityRenderState> extends Entity
             this.rightWingOuter.zRot = -this.leftWingOuter.zRot;
         }
     }
-
 }

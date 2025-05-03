@@ -31,7 +31,7 @@ public class ValkyrieRenderer extends MobRenderer<Valkyrie, ValkyrieRenderState,
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ValkyrieRenderState valkyrie) {
+    public ResourceLocation getTextureLocation(ValkyrieRenderState renderState) {
         return VALKYRIE_TEXTURE;
     }
 }

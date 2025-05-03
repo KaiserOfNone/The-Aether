@@ -7,5 +7,4 @@ public class AechorPlantRenderState extends LivingEntityRenderState {
     public boolean isTargeting;
     public float sinage;
     public float sinageAdd;
-
 }

@@ -7,5 +7,4 @@ public class FireMinionModel<T extends LivingEntityRenderState> extends SunSpiri
     public FireMinionModel(ModelPart root) {
         super(root);
     }
-
 }

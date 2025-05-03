@@ -22,7 +22,7 @@ public class CloudMinionRenderer extends MobRenderer<CloudMinion, LivingEntityRe
     }
 
     @Override
-    public ResourceLocation getTextureLocation(LivingEntityRenderState cloudMinion) {
+    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
         return CLOUD_MINION_TEXTURE;
     }
 }

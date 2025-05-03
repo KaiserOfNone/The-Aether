@@ -26,35 +26,35 @@ public class LightningKnifeRenderer extends EntityRenderer<ThrownLightningKnife,
     }
 
     @Override
-    public void extractRenderState(ThrownLightningKnife p_entity, LightningKnifeRenderState reusedState, float partialTick) {
-        super.extractRenderState(p_entity, reusedState, partialTick);
-        reusedState.xRot = p_entity.getXRot(partialTick);
-        reusedState.yRot = (-(p_entity.xRotO + (p_entity.getXRot() - p_entity.xRotO) * partialTick));
-        reusedState.stack = p_entity.getItem();
-        reusedState.id = p_entity.getId();
+    public void extractRenderState(ThrownLightningKnife entity, LightningKnifeRenderState reusedState, float partialTick) {
+        super.extractRenderState(entity, reusedState, partialTick);
+        reusedState.xRot = entity.getXRot(partialTick);
+        reusedState.yRot = (-(entity.xRotO + (entity.getXRot() - entity.xRotO) * partialTick));
+        reusedState.stack = entity.getItem();
+        reusedState.id = entity.getId();
     }
 
     /**
      * Rotates and renders the Lightning Knife to look as if it has been thrown.
      *
-     * @param lightningKnife The {@link LightningKnifeRenderState} entity.
+     * @param renderState    The {@link LightningKnifeRenderState} for the entity.
      * @param poseStack      The rendering {@link PoseStack}.
      * @param buffer         The rendering {@link MultiBufferSource}.
      * @param packedLight    The {@link Integer} for the packed lighting for rendering.
      */
     @Override
-    public void render(LightningKnifeRenderState lightningKnife, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void render(LightningKnifeRenderState renderState, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
-        Quaternionf quaternion = Axis.YP.rotationDegrees(lightningKnife.yRot);
-        quaternion.mul(Axis.XP.rotationDegrees(lightningKnife.yRot - 90.0F));
+        Quaternionf quaternion = Axis.YP.rotationDegrees(renderState.yRot);
+        quaternion.mul(Axis.XP.rotationDegrees(renderState.yRot - 90.0F));
         quaternion.mul(Axis.ZP.rotationDegrees(-135.0F));
         poseStack.mulPose(quaternion);
-        Minecraft.getInstance().getItemRenderer().renderStatic(lightningKnife.stack, ItemDisplayContext.GUI, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, null, lightningKnife.id);
+        Minecraft.getInstance().getItemRenderer().renderStatic(renderState.stack, ItemDisplayContext.GUI, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, null, renderState.id);
         poseStack.popPose();
-        super.render(lightningKnife, poseStack, buffer, packedLight);
+        super.render(renderState, poseStack, buffer, packedLight);
     }
 
-    public ResourceLocation getTextureLocation(LightningKnifeRenderState lightningKnife) {
+    public ResourceLocation getTextureLocation(LightningKnifeRenderState renderState) {
         return InventoryMenu.BLOCK_ATLAS;
     }
 }

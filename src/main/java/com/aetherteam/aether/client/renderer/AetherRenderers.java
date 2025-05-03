@@ -117,7 +117,7 @@ public class AetherRenderers {
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(AetherModelLayers.SKYROOT_BED_FOOT, BedRenderer::createFootLayer);
         event.registerLayerDefinition(AetherModelLayers.SKYROOT_BED_HEAD, BedRenderer::createHeadLayer);
-        event.registerLayerDefinition(AetherModelLayers.CHEST_MIMIC, ChestRenderer::createSingleBodyLayer);
+        event.registerLayerDefinition(AetherModelLayers.CHEST_MIMIC, ChestModel::createSingleBodyLayer);
 
         event.registerLayerDefinition(AetherModelLayers.PHYG, () -> PigModel.createBodyLayer(CubeDeformation.NONE));
         event.registerLayerDefinition(AetherModelLayers.PHYG_WINGS, () -> QuadrupedWingsModel.createMainLayer(10.0F));
@@ -130,7 +130,7 @@ public class AetherRenderers {
         event.registerLayerDefinition(AetherModelLayers.FLYING_COW_SADDLE, CowModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.FLYING_COW_BABY, () -> CowModel.createBodyLayer().apply(CowModel.BABY_TRANSFORMER));
         event.registerLayerDefinition(AetherModelLayers.FLYING_COW_BABY_SADDLE, () -> CowModel.createBodyLayer().apply(CowModel.BABY_TRANSFORMER));
-        event.registerLayerDefinition(AetherModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
+        event.registerLayerDefinition(AetherModelLayers.SHEEPUFF, () -> SheepuffModel.createBodyLayer().apply(SheepModel.BABY_TRANSFORMER));
         event.registerLayerDefinition(AetherModelLayers.SHEEPUFF_WOOL, () -> SheepuffWoolModel.createFurLayer(new CubeDeformation(1.75F), 0.0F));
         event.registerLayerDefinition(AetherModelLayers.SHEEPUFF_WOOL_PUFFED, () -> SheepuffWoolModel.createFurLayer(new CubeDeformation(3.75F), 2.0F));
         event.registerLayerDefinition(AetherModelLayers.SHEEPUFF_BABY, () -> SheepuffModel.createBodyLayer().apply(SheepModel.BABY_TRANSFORMER));
@@ -162,8 +162,8 @@ public class AetherRenderers {
         event.registerLayerDefinition(AetherModelLayers.VALKYRIE_QUEEN_WINGS, () -> ValkyrieWingsModel.createMainLayer(4.5F, 2.5F));
         event.registerLayerDefinition(AetherModelLayers.SUN_SPIRIT, SunSpiritModel::createBodyLayer);
 
-        event.registerLayerDefinition(AetherModelLayers.SKYROOT_BOAT, BoatModel::createBodyModel);
-        event.registerLayerDefinition(AetherModelLayers.SKYROOT_CHEST_BOAT, ChestBoatModel::createBodyModel);
+        event.registerLayerDefinition(AetherModelLayers.SKYROOT_BOAT, BoatModel::createBoatModel);
+        event.registerLayerDefinition(AetherModelLayers.SKYROOT_CHEST_BOAT, BoatModel::createChestBoatModel);
 
         event.registerLayerDefinition(AetherModelLayers.CLOUD_MINION, CloudMinionModel::createBodyLayer);
 

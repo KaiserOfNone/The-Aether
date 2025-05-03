@@ -25,5 +25,4 @@ public class HaloModel<T extends EntityRenderState> extends EntityModel<T> {
                 PartPose.offset(0.0F, 0.0F + offsetY, 0.0F + offsetZ));
         return LayerDefinition.create(meshDefinition, 16, 16);
     }
-
 }

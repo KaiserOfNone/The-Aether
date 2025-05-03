@@ -8,6 +8,7 @@ import com.aetherteam.aether.client.renderer.entity.layers.*;
 import com.aetherteam.aether.client.renderer.entity.model.MoaModel;
 import com.aetherteam.aether.client.renderer.entity.state.MoaRenderState;
 import com.aetherteam.aether.data.resources.registries.AetherMoaTypes;
+import com.aetherteam.aether.entity.monster.Cockatrice;
 import com.aetherteam.aether.entity.passive.Moa;
 import com.aetherteam.aether.perk.data.ClientMoaSkinPerkData;
 import com.aetherteam.aether.perk.types.MoaData;
@@ -46,7 +47,7 @@ public class MoaRenderer extends MobRenderer<Moa, MoaRenderState, MoaModel> {
         reusedState.isEntityOnGround = entity.isEntityOnGround();
         reusedState.renderLegs = !entity.isSitting() || (!entity.isEntityOnGround() && entity.isSitting());
         reusedState.sitting = entity.isSitting();
-        reusedState.ageInTicks = getBob(reusedState, entity, partialTick);
+        reusedState.ageInTicks = this.getWingRotation(reusedState, entity, partialTick);
         reusedState.rider = entity.getRider();
         reusedState.lastRider = entity.getLastRider();
         reusedState.moaUUID = entity.getMoaUUID();
@@ -57,14 +58,14 @@ public class MoaRenderer extends MobRenderer<Moa, MoaRenderState, MoaModel> {
     /**
      * Scales the Moa and also repositions it if it is sitting.
      *
-     * @param moa          The {@link MoaRenderState} entity.
+     * @param renderState  The {@link MoaRenderState} for the entity.
      * @param poseStack    The rendering {@link PoseStack}.
      */
     @Override
-    protected void scale(MoaRenderState moa, PoseStack poseStack) {
-        float moaScale = moa.isBaby ? 1.0F : 1.8F;
+    protected void scale(MoaRenderState renderState, PoseStack poseStack) {
+        float moaScale = renderState.isBaby ? 1.0F : 1.8F;
         poseStack.scale(moaScale, moaScale, moaScale);
-        if (moa.sitting) {
+        if (renderState.sitting) {
             poseStack.translate(0.0, 0.5, 0.0);
         }
     }
@@ -72,51 +73,52 @@ public class MoaRenderer extends MobRenderer<Moa, MoaRenderState, MoaModel> {
     /**
      * Passes the Moa's wing rotation to the model as the "ageInTicks" parameter.
      *
-     * @param moa          The {@link Moa} entity.
-     * @param partialTicks The {@link Float} for the game's partial ticks.
+     * @param renderState   The {@link MoaRenderState} for the entity.
+     * @param entity    The {@link Cockatrice} entity
+     * @param partialTick The {@link Float} for the game's partial ticks.
      * @return The {@link Float} for the petal rotation.
      */
-    protected float getBob(MoaRenderState state, Moa moa, float partialTicks) {
-        return state.setupWingsAnimation(moa, partialTicks);
+    protected float getWingRotation(MoaRenderState renderState, Moa entity, float partialTick) {
+        return renderState.setupWingsAnimation(entity, partialTick);
     }
 
     /**
      * Retrieves the texture for the Moa, whether it be from the {@link MoaType}, a player's {@link com.aetherteam.aether.perk.types.MoaSkins.MoaSkin}, or an Easter Egg skin.
      *
-     * @param moa The {@link MoaRenderState} to retrieve the skin from.
+     * @param renderState The {@link MoaRenderState} to retrieve the skin from.
      * @return The {@link ResourceLocation} for the emissive texture.
      */
     @Override
-    public ResourceLocation getTextureLocation(MoaRenderState moa) {
-        return getTexture(moa);
+    public ResourceLocation getTextureLocation(MoaRenderState renderState) {
+        return getTexture(renderState);
     }
 
-    public static ResourceLocation getTexture(MoaRenderState moa) {
-        ResourceLocation moaSkin = getMoaSkinLocation(moa);
+    public static ResourceLocation getTexture(MoaRenderState renderState) {
+        ResourceLocation moaSkin = getMoaSkinLocation(renderState);
         if (moaSkin != null) {
             return moaSkin;
         }
-        if (moa.customName != null && moa.customName.getString().equals("Mos")) {
+        if (renderState.customName != null && renderState.customName.getString().equals("Mos")) {
             return MOS_TEXTURE;
         }
-        if ((moa.customName != null && moa.customName.getString().equals("Raptor__") && moa.type == AetherMoaTypes.BLUE)
-            || (moa.rider != null && moa.rider.equals(UUID.fromString("c3e6871e-8e60-490a-8a8d-2bbe35ad1604")))) { // Raptor__
+        if ((renderState.customName != null && renderState.customName.getString().equals("Raptor__") && renderState.type == AetherMoaTypes.BLUE)
+            || (renderState.rider != null && renderState.rider.equals(UUID.fromString("c3e6871e-8e60-490a-8a8d-2bbe35ad1604")))) { // Raptor__
             return RAPTOR_TEXTURE;
         }
-        ResourceLocation moaType = moa.location;
+        ResourceLocation moaType = renderState.location;
         return moaType == null ? DEFAULT_TEXTURE : moaType;
     }
 
     /**
      * Retrieves the texture for the player's {@link com.aetherteam.aether.perk.types.MoaSkins.MoaSkin}, if there is one and the player has a Moa Skin.
      *
-     * @param moa The {@link Moa} to retrieve the skin from.
+     * @param renderState The {@link MoaRenderState} to retrieve the skin from.
      * @return The {@link ResourceLocation} for the emissive texture.
      */
     @Nullable
-    private static ResourceLocation getMoaSkinLocation(MoaRenderState moa) {
-        UUID lastRiderUUID = moa.lastRider;
-        UUID moaUUID = moa.moaUUID;
+    private static ResourceLocation getMoaSkinLocation(MoaRenderState renderState) {
+        UUID lastRiderUUID = renderState.lastRider;
+        UUID moaUUID = renderState.moaUUID;
         Map<UUID, MoaData> userSkinsData = ClientMoaSkinPerkData.INSTANCE.getClientPerkData();
         if (Minecraft.getInstance().screen instanceof MoaSkinsScreen moaSkinsScreen && moaSkinsScreen.getSelectedSkin() != null && moaSkinsScreen.getPreviewMoa() != null && moaSkinsScreen.getPreviewMoa().getMoaUUID() != null && moaSkinsScreen.getPreviewMoa().getMoaUUID().equals(moaUUID)) {
             return moaSkinsScreen.getSelectedSkin().getSkinLocation();

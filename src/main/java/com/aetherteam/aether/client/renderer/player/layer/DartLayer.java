@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.StuckInBodyLayer;
+import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -18,13 +19,13 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.function.Function;
 
-public class DartLayer<T extends LivingEntity, M extends PlayerModel<T>> extends StuckInBodyLayer<T, M> {
+public class DartLayer<M extends PlayerModel> extends StuckInBodyLayer<M> {
     private final EntityRenderDispatcher dispatcher;
     private final Function<Entity, AbstractDart> dart;
     private final Function<AetherPlayerAttachment, Integer> dartCount;
     private final float offset;
 
-    public DartLayer(EntityRenderDispatcher renderDispatcher, LivingEntityRenderer<T, M> renderer, Function<Entity, AbstractDart> dart, Function<AetherPlayerAttachment, Integer> dartCount, float offset) {
+    public DartLayer(EntityRenderDispatcher renderDispatcher, LivingEntityRenderer<?, PlayerRenderState, M> renderer, Function<Entity, AbstractDart> dart, Function<AetherPlayerAttachment, Integer> dartCount, float offset) {
         super(renderer);
         this.dispatcher = renderDispatcher;
         this.dart = dart;

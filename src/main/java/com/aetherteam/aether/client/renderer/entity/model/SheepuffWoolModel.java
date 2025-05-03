@@ -7,8 +7,6 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class SheepuffWoolModel extends QuadrupedModel<SheepuffRenderState> {
-    public float headXRot;
-
     public SheepuffWoolModel(ModelPart root) {
         super(root);
     }
@@ -26,6 +24,7 @@ public class SheepuffWoolModel extends QuadrupedModel<SheepuffRenderState> {
         return LayerDefinition.create(meshDefinition, 64, 32);
     }
 
+    @Override
     public void setupAnim(SheepuffRenderState renderState) {
         super.setupAnim(renderState);
         this.head.y += renderState.headEatPositionScale * 9.0F * renderState.ageScale;

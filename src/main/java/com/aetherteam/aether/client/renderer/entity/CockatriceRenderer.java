@@ -4,14 +4,14 @@ import com.aetherteam.aether.Aether;
 import com.aetherteam.aether.client.renderer.AetherModelLayers;
 import com.aetherteam.aether.client.renderer.entity.layers.CockatriceMarkingsLayer;
 import com.aetherteam.aether.client.renderer.entity.model.CockatriceModel;
-import com.aetherteam.aether.client.renderer.entity.state.BirdRenderState;
+import com.aetherteam.aether.client.renderer.entity.state.BipedBirdRenderState;
 import com.aetherteam.aether.entity.monster.Cockatrice;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-public class CockatriceRenderer extends MobRenderer<Cockatrice, BirdRenderState, CockatriceModel> {
+public class CockatriceRenderer extends MobRenderer<Cockatrice, BipedBirdRenderState, CockatriceModel> {
     private static final ResourceLocation COCKATRICE_TEXTURE = ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/cockatrice/cockatrice.png");
 
     public CockatriceRenderer(EntityRendererProvider.Context context) {
@@ -20,35 +20,36 @@ public class CockatriceRenderer extends MobRenderer<Cockatrice, BirdRenderState,
     }
 
     @Override
-    public BirdRenderState createRenderState() {
-        return new BirdRenderState();
+    public BipedBirdRenderState createRenderState() {
+        return new BipedBirdRenderState();
     }
 
     @Override
-    protected void scale(BirdRenderState cockatrice, PoseStack poseStack) {
+    protected void scale(BipedBirdRenderState renderState, PoseStack poseStack) {
         poseStack.scale(1.8F, 1.8F, 1.8F);
     }
 
     @Override
-    public void extractRenderState(Cockatrice entity, BirdRenderState reusedState, float partialTick) {
+    public void extractRenderState(Cockatrice entity, BipedBirdRenderState reusedState, float partialTick) {
         super.extractRenderState(entity, reusedState, partialTick);
         reusedState.isEntityOnGround = entity.isEntityOnGround();
-        reusedState.ageInTicks = getBob(reusedState, entity, partialTick);
+        reusedState.wingRotation = this.getWingRotation(reusedState, entity, partialTick);
     }
 
     /**
      * Passes the Cockatrice's wing rotation to the model as the "ageInTicks" parameter.
      *
-     * @param cockatrice   The {@link Cockatrice} entity.
-     * @param partialTicks The {@link Float} for the game's partial ticks.
-     * @return The {@link Float} for the petal rotation.
+     * @param renderState   The {@link BipedBirdRenderState} for the entity.
+     * @param entity    The {@link Cockatrice} entity
+     * @param partialTick  The {@link Float} for the game's partial ticks.
+     * @return              The {@link Float} for the petal rotation.
      */
-    protected float getBob(BirdRenderState state, Cockatrice cockatrice, float partialTicks) {
-        return state.setupWingsAnimation(cockatrice, partialTicks);
+    protected float getWingRotation(BipedBirdRenderState renderState, Cockatrice entity, float partialTick) {
+        return renderState.setupWingsAnimation(entity, partialTick);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(BirdRenderState cockatrice) {
+    public ResourceLocation getTextureLocation(BipedBirdRenderState renderState) {
         return COCKATRICE_TEXTURE;
     }
 }

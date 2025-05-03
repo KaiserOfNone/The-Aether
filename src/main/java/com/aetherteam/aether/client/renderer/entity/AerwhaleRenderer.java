@@ -37,7 +37,7 @@ public class AerwhaleRenderer extends MultiModelRenderer<Aerwhale, AerwhaleRende
     }
 
     @Override
-    protected void scale(AerwhaleRenderState aerwhale, PoseStack poseStack) {
+    protected void scale(AerwhaleRenderState renderState, PoseStack poseStack) {
         poseStack.translate(0.0, -0.5, 0.0);
         poseStack.scale(2.0F, 2.0F, 2.0F);
     }
@@ -45,14 +45,14 @@ public class AerwhaleRenderer extends MultiModelRenderer<Aerwhale, AerwhaleRende
     /**
      * Rotates the Aerwhale from data values stored in the entity.
      *
-     * @param aerwhale     The {@link Aerwhale} entity.
+     * @param renderState  The {@link AerwhaleRenderState} for the entity.
      * @param poseStack    The rendering {@link PoseStack}.
      * @param bob          The {@link Float} for the entity's animation bob.
      */
     @Override
-    protected void setupRotations(AerwhaleRenderState aerwhale, PoseStack poseStack, float bob, float yBodyRotation) {
-        super.setupRotations(aerwhale, poseStack, bob, yBodyRotation);
-        poseStack.mulPose(Axis.XP.rotationDegrees(aerwhale.xRotData));
+    protected void setupRotations(AerwhaleRenderState renderState, PoseStack poseStack, float bob, float yBodyRotation) {
+        super.setupRotations(renderState, poseStack, bob, yBodyRotation);
+        poseStack.mulPose(Axis.XP.rotationDegrees(renderState.xRotData));
     }
 
     @Override

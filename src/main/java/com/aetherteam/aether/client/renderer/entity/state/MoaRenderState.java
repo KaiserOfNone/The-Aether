@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.UUID;
 
-public class MoaRenderState extends BirdRenderState implements SaddleableRenderState {
+public class MoaRenderState extends BipedBirdRenderState implements SaddleableRenderState {
     public boolean renderLegs;
     public boolean sitting;
     public boolean saddle;

@@ -37,11 +37,10 @@ public class MimicModel extends EntityModel<LivingEntityRenderState> {
         return LayerDefinition.create(meshDefinition, 128, 64);
     }
 
-
     @Override
-    public void setupAnim(LivingEntityRenderState mimic) {
-        this.upperBody.xRot = Mth.PI - 0.6F * (1.0F + Mth.cos(mimic.ageInTicks / 10.0F * Mth.PI));
-        this.rightLeg.xRot = Mth.cos(mimic.walkAnimationSpeed * 0.6662F) * 1.4F * mimic.walkAnimationPos;
-        this.leftLeg.xRot = Mth.cos(mimic.walkAnimationSpeed * 0.6662F + Mth.PI) * 1.4F * mimic.walkAnimationPos;
+    public void setupAnim(LivingEntityRenderState renderState) {
+        this.upperBody.xRot = Mth.PI - 0.6F * (1.0F + Mth.cos(renderState.ageInTicks / 10.0F * Mth.PI));
+        this.rightLeg.xRot = Mth.cos(renderState.walkAnimationSpeed * 0.6662F) * 1.4F * renderState.walkAnimationPos;
+        this.leftLeg.xRot = Mth.cos(renderState.walkAnimationSpeed * 0.6662F + Mth.PI) * 1.4F * renderState.walkAnimationPos;
     }
 }

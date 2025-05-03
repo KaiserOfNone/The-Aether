@@ -17,7 +17,7 @@ public class SentryRenderer extends MobRenderer<Sentry, SentryRenderState, Slime
 
     public SentryRenderer(EntityRendererProvider.Context context) {
         super(context, new SlimeModel(context.bakeLayer(AetherModelLayers.SENTRY)), 0.3F);
-        this.addLayer(new SentryGlowLayer(this));
+        this.addLayer(new SentryGlowLayer<>(this));
     }
 
     @Override
@@ -34,21 +34,21 @@ public class SentryRenderer extends MobRenderer<Sentry, SentryRenderState, Slime
     /**
      * Scales the Sentry according to its size.
      *
-     * @param sentry       The {@link Sentry} entity.
+     * @param renderState  The {@link SentryRenderState} for the entity.
      * @param poseStack    The rendering {@link PoseStack}.
      */
     @Override
-    protected void scale(SentryRenderState sentry, PoseStack poseStack) {
+    protected void scale(SentryRenderState renderState, PoseStack poseStack) {
         float f = 0.879F;
         poseStack.scale(f, f, f);
-        float f1 = sentry.scale + 1.0F;
+        float f1 = renderState.scale + 1.0F;
         float f2 = 0.0F;
         float f3 = 1.0F / (f2 + 1.0F);
         poseStack.scale(f3 * f1, 1.0F / f3 * f1, f3 * f1);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SentryRenderState sentry) {
-        return sentry.awake ? SENTRY_LIT_TEXTURE : SENTRY_TEXTURE;
+    public ResourceLocation getTextureLocation(SentryRenderState renderState) {
+        return renderState.awake ? SENTRY_LIT_TEXTURE : SENTRY_TEXTURE;
     }
 }

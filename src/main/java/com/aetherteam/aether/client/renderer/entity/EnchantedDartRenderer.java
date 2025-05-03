@@ -20,7 +20,7 @@ public class EnchantedDartRenderer extends ArrowRenderer<EnchantedDart, ArrowRen
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ArrowRenderState dart) {
+    public ResourceLocation getTextureLocation(ArrowRenderState renderState) {
         return ENCHANTED_DART_TEXTURE;
     }
 }

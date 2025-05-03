@@ -4,7 +4,7 @@ import com.aetherteam.aether.entity.WingedBird;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.util.Mth;
 
-public class BirdRenderState extends LivingEntityRenderState {
+public class BipedBirdRenderState extends LivingEntityRenderState {
     public boolean isEntityOnGround;
     public float wingRotation;
 

@@ -21,7 +21,7 @@ public class FireCrystalRenderer extends AbstractCrystalRenderer<FireCrystal, Cr
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CrystalRenderState crystal) {
+    public ResourceLocation getTextureLocation(CrystalRenderState renderState) {
         return FIRE_CRYSTAL_TEXTURE;
     }
 }

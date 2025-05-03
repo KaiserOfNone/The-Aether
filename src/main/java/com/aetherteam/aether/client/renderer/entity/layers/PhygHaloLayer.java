@@ -30,17 +30,17 @@ public class PhygHaloLayer extends RenderLayer<PhygRenderState, PigModel> {
      * @param poseStack       The rendering {@link PoseStack}.
      * @param buffer          The rendering {@link MultiBufferSource}.
      * @param packedLight     The {@link Integer} for the packed lighting for rendering.
-     * @param phyg            The {@link Phyg} entity.
+     * @param renderState     The {@link PhygRenderState} for the entity.
      * @param netHeadYaw      The {@link Float} for the head yaw rotation.
      * @param headPitch       The {@link Float} for the head pitch rotation.
      */
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, PhygRenderState phyg, float netHeadYaw, float headPitch) {
-        if (phyg.customName != null && phyg.customName.getString().equals("KingPhygieBoo")) {
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, PhygRenderState renderState, float netHeadYaw, float headPitch) {
+        if (renderState.customName != null && renderState.customName.getString().equals("KingPhygieBoo")) {
             QuadrupedModelAccessor quadrupedModelAccessor = (QuadrupedModelAccessor) this.getParentModel();
             this.phygHalo.halo.yRot = quadrupedModelAccessor.aether$getHead().yRot;
             this.phygHalo.halo.xRot = quadrupedModelAccessor.aether$getHead().xRot;
-            this.phygHalo.setupAnim(phyg);
+            this.phygHalo.setupAnim(renderState);
             VertexConsumer consumer = buffer.getBuffer(RenderType.eyes(HALO_LOCATION));
             this.phygHalo.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY, 1073741823);
         }

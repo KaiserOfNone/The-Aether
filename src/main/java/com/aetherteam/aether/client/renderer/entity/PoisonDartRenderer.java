@@ -20,7 +20,7 @@ public class PoisonDartRenderer extends ArrowRenderer<PoisonDart, ArrowRenderSta
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ArrowRenderState dart) {
+    public ResourceLocation getTextureLocation(ArrowRenderState renderState) {
         return POISON_DART_TEXTURE;
     }
 }

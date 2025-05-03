@@ -17,8 +17,8 @@ public class SliderGlowLayer extends EyesLayer<SliderRenderState, SliderModel> {
     private static final RenderType SLIDER_AWAKE_GLOW = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/slider/slider_awake_glow.png"));
     private static final RenderType SLIDER_AWAKE_CRITICAL_GLOW = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(Aether.MODID, "textures/entity/mobs/slider/slider_awake_critical_glow.png"));
 
-    public SliderGlowLayer(RenderLayerParent<SliderRenderState, SliderModel> pRenderer) {
-        super(pRenderer);
+    public SliderGlowLayer(RenderLayerParent<SliderRenderState, SliderModel> entityRenderer) {
+        super(entityRenderer);
     }
 
     /**
@@ -27,14 +27,14 @@ public class SliderGlowLayer extends EyesLayer<SliderRenderState, SliderModel> {
      * @param poseStack       The rendering {@link PoseStack}.
      * @param buffer          The rendering {@link MultiBufferSource}.
      * @param packedLight     The {@link Integer} for the packed lighting for rendering.
-     * @param slider          The {@link Slider} entity.
+     * @param renderState     The {@link SliderRenderState} for the entity.
      * @param netHeadYaw      The {@link Float} for the head yaw rotation.
      * @param headPitch       The {@link Float} for the head pitch rotation.
      */
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, SliderRenderState slider, float netHeadYaw, float headPitch) {
-        VertexConsumer consumer = buffer.getBuffer(this.renderType(slider));
-        if (slider.awake) {
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, SliderRenderState renderState, float netHeadYaw, float headPitch) {
+        VertexConsumer consumer = buffer.getBuffer(this.renderType(renderState));
+        if (renderState.awake) {
             this.getParentModel().renderToBuffer(poseStack, consumer, 15728640, OverlayTexture.NO_OVERLAY);
         }
     }
@@ -42,11 +42,11 @@ public class SliderGlowLayer extends EyesLayer<SliderRenderState, SliderModel> {
     /**
      * Selects the red glow render if the Slider is critical, and otherwise selects the default blue glow render.
      *
-     * @param slider The {@link SliderRenderState}.
+     * @param renderState The {@link SliderRenderState}.
      * @return The {@link RenderType}.
      */
-    public RenderType renderType(SliderRenderState slider) {
-        if (slider.critical) {
+    public RenderType renderType(SliderRenderState renderState) {
+        if (renderState.critical) {
             return SLIDER_AWAKE_CRITICAL_GLOW;
         }
         return this.renderType();

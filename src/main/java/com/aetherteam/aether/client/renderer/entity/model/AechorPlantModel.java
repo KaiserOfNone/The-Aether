@@ -105,39 +105,36 @@ public class AechorPlantModel extends EntityModel<AechorPlantRenderState> {
         return LayerDefinition.create(meshDefinition, 64, 32);
     }
 
-
     public Iterable<ModelPart> stamenStemParts() {
         return ImmutableList.of(this.stamenStem1, this.stamenStem2, this.stamenStem3);
     }
 
-
     public Iterable<ModelPart> leafParts() {
         return ImmutableList.of(this.leaf1, this.leaf2, this.leaf3, this.leaf4, this.leaf5, this.leaf6, this.leaf7, this.leaf8, this.leaf9, this.leaf10);
     }
-
 
     public Iterable<ModelPart> petalParts() {
         return ImmutableList.of(this.upperPetal1, this.lowerPetal1, this.upperPetal2, this.lowerPetal2, this.upperPetal3, this.lowerPetal3, this.upperPetal4, this.lowerPetal4, this.upperPetal5, this.lowerPetal5);
     }
 
     @Override
-    public void setupAnim(AechorPlantRenderState aechorPlant) {
-        float sinage1 = Mth.sin(aechorPlant.ageInTicks);
+    public void setupAnim(AechorPlantRenderState renderState) {
+        float sinage1 = Mth.sin(renderState.ageInTicks);
         float sinage2;
 
-        if (aechorPlant.isHurt) {
+        if (renderState.isHurt) {
             sinage1 *= 0.45F;
             sinage1 -= 0.125F;
-            sinage2 = 1.75F + Mth.sin(aechorPlant.ageInTicks + 2.0F) * 1.5F;
-        } else if (aechorPlant.isTargeting) {
+            sinage2 = 1.75F + Mth.sin(renderState.ageInTicks + 2.0F) * 1.5F;
+        } else if (renderState.isTargeting) {
             sinage1 *= 0.25F;
-            sinage2 = 1.75F + Mth.sin(aechorPlant.ageInTicks + 2.0F) * 1.5F;
+            sinage2 = 1.75F + Mth.sin(renderState.ageInTicks + 2.0F) * 1.5F;
         } else {
             sinage1 *= 0.125F;
             sinage2 = 1.75F;
         }
 
-        this.head.yRot = aechorPlant.yRot / 57.29578F;
+        this.head.yRot = renderState.yRot / 57.29578F;
         this.stem.yRot = this.head.yRot;
         this.stem.y = sinage2 * 0.5F;
 

@@ -14,11 +14,10 @@ public class BlueSwetRenderer extends SwetRenderer {
     public BlueSwetRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.addLayer(new SwetOuterLayer(this, new SlimeModel(context.bakeLayer(AetherModelLayers.SWET_OUTER)), BLUE_TEXTURE));
-
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SwetRenderState swet) {
+    public ResourceLocation getTextureLocation(SwetRenderState renderState) {
         return BLUE_TEXTURE;
     }
 }

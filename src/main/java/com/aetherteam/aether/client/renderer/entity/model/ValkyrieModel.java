@@ -135,26 +135,26 @@ public class ValkyrieModel<T extends ValkyrieRenderState> extends HumanoidModel<
     }
 
     @Override
-    public void setupAnim(T valkyrie) {
-        this.head.yRot = valkyrie.yRot * Mth.DEG_TO_RAD;
-        this.head.xRot = valkyrie.xRot * Mth.DEG_TO_RAD;
+    public void setupAnim(T renderState) {
+        this.head.yRot = renderState.yRot * Mth.DEG_TO_RAD;
+        this.head.xRot = renderState.xRot * Mth.DEG_TO_RAD;
 
         this.rightArm.x = -4.0F;
         this.rightArm.z = 0.0F;
         this.leftArm.x = 5.0F;
         this.leftArm.z = 0.0F;
 
-        this.rightArm.xRot = Mth.cos(valkyrie.walkAnimationPos * 0.6662F + Mth.PI) * 2.0F * valkyrie.walkAnimationSpeed * 0.5F;
-        this.leftArm.xRot = Mth.cos(valkyrie.walkAnimationPos * 0.6662F) * 2.0F * valkyrie.walkAnimationSpeed * 0.5F;
+        this.rightArm.xRot = Mth.cos(renderState.walkAnimationPos * 0.6662F + Mth.PI) * 2.0F * renderState.walkAnimationSpeed * 0.5F;
+        this.leftArm.xRot = Mth.cos(renderState.walkAnimationPos * 0.6662F) * 2.0F * renderState.walkAnimationSpeed * 0.5F;
         this.rightArm.zRot = 0.0F;
         this.leftArm.zRot = 0.0F;
 
-        this.rightLeg.xRot = Mth.cos(valkyrie.walkAnimationPos * 0.6662F) * 1.4F * valkyrie.walkAnimationSpeed;
-        this.leftLeg.xRot = Mth.cos(valkyrie.walkAnimationPos * 0.6662F + Mth.PI) * 1.4F * valkyrie.walkAnimationSpeed;
+        this.rightLeg.xRot = Mth.cos(renderState.walkAnimationPos * 0.6662F) * 1.4F * renderState.walkAnimationSpeed;
+        this.leftLeg.xRot = Mth.cos(renderState.walkAnimationPos * 0.6662F + Mth.PI) * 1.4F * renderState.walkAnimationSpeed;
 
         this.rightArm.yRot = 0.0F;
         this.leftArm.yRot = 0.0F;
 
-        this.setupAttackAnimation(valkyrie, valkyrie.ageInTicks);
+        this.setupAttackAnimation(renderState, renderState.ageInTicks);
     }
 }
