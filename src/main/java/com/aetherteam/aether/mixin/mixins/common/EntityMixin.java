@@ -6,8 +6,6 @@ import com.aetherteam.aether.event.hooks.DimensionHooks;
 import com.aetherteam.aether.item.combat.abilities.armor.PhoenixArmor;
 import com.aetherteam.aether.network.packet.clientbound.SetVehiclePacket;
 import com.aetherteam.aether.world.LevelUtil;
-
-import dev.architectury.event.events.common.PlayerEvent.PickupItem;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,7 +14,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Saddleable;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.portal.DimensionTransition;
@@ -74,9 +71,6 @@ public class EntityMixin {
     private static Entity entityFell(Entity entity) {
         Level serverLevel = entity.level();
         MinecraftServer minecraftserver = serverLevel.getServer();
-        if (entity instanceof AbstractArrow) {
-            return null;
-        }
         if (minecraftserver != null) {
             ServerLevel destination = minecraftserver.getLevel(LevelUtil.returnDimension());
             if (destination != null && LevelUtil.returnDimension() != LevelUtil.destinationDimension()) {

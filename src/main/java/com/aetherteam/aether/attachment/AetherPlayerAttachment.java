@@ -257,18 +257,6 @@ public class AetherPlayerAttachment implements INBTSynchable {
                     PlayerList playerList = server.getPlayerList();
                     for (ServerPlayer serverPlayer : playerList.getPlayers()) {
                         if (!serverPlayer.getUUID().equals(player.getUUID())) {
-                            Aether.LOGGER.info("Syncing player: {}", player.getName().getString());
-                            Aether.LOGGER.info("Synced Variables - Portal: {}, SpawnInAether: {}, SavedHealth: {}, LifeShards: {}, SeenSunSpirit: {}, RemedyDuration: {}, MountedAerbunnyTag: {}, LastRiddenMoa: {}, ShowPatreonMessage: {}, LoginsUntilMessage: {}",
-                                this.canGetPortal(),
-                                this.canSpawnInAether(),
-                                this.getSavedHealth(),
-                                this.getLifeShardCount(),
-                                this.hasSeenSunSpiritDialogue(),
-                                this.getRemedyStartDuration(),
-                                this.getMountedAerbunnyTag(),
-                                this.getLastRiddenMoa(),
-                                this.canShowPatreonMessage,
-                                this.loginsUntilPatreonMessage);
                             player.getData(AetherDataAttachments.AETHER_PLAYER).forceSync(player.getId(), INBTSynchable.Direction.CLIENT);
                         }
                     }
